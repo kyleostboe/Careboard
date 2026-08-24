@@ -124,7 +124,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-vis
 .orient .big{display:flex;align-items:flex-end;gap:12px;margin:2px 0 4px}
 .orient .day{font-size:3.1rem;font-weight:750;line-height:.9}
 .orient .of{font-size:.95rem;color:var(--muted);padding-bottom:6px}
-.band{display:grid;grid-template-columns:repeat(21,1fr);gap:3px;margin:14px 0 8px}
+.band{display:grid;gap:3px;margin:14px 0 8px}
 .band i{
   height:30px;border-radius:4px;background:var(--line-soft);
   display:flex;align-items:center;justify-content:center;
@@ -344,6 +344,35 @@ const SX = [
 const LEVELS = ['None','Mild','Moderate','Bad'];
 const TAGS = ['Pathology','Imaging','Heart','Labs','Notes','Instructions','Insurance','Consents','Other'];
 
+
+/* Common regimens with their usual shape. Every value stays editable — cycle
+   counts in particular vary a lot by stage and intent, so these are starting
+   points, not prescriptions. */
+const REGIMENS = [
+  {g:'Breast', n:'TCHP', full:'TCHP — docetaxel, carboplatin, trastuzumab, pertuzumab', len:21, cyc:6},
+  {g:'Breast', n:'TCH', full:'TCH — docetaxel, carboplatin, trastuzumab', len:21, cyc:6},
+  {g:'Breast', n:'AC then T', full:'AC then T — doxorubicin and cyclophosphamide, then a taxane', len:21, cyc:4},
+  {g:'Breast', n:'TC', full:'TC — docetaxel and cyclophosphamide', len:21, cyc:4},
+  {g:'Breast', n:'Paclitaxel weekly', full:'Paclitaxel, given weekly', len:7, cyc:12},
+  {g:'Breast', n:'EC / FEC', full:'EC or FEC — epirubicin and cyclophosphamide, with or without fluorouracil', len:21, cyc:6},
+  {g:'Colorectal', n:'FOLFOX', full:'FOLFOX — fluorouracil, leucovorin, oxaliplatin', len:14, cyc:12},
+  {g:'Colorectal', n:'FOLFIRI', full:'FOLFIRI — fluorouracil, leucovorin, irinotecan', len:14, cyc:12},
+  {g:'Colorectal', n:'CAPOX', full:'CAPOX — capecitabine and oxaliplatin', len:21, cyc:8},
+  {g:'Lung', n:'Carboplatin + pemetrexed', full:'Carboplatin and pemetrexed', len:21, cyc:4},
+  {g:'Lung', n:'Carboplatin + paclitaxel', full:'Carboplatin and paclitaxel', len:21, cyc:4},
+  {g:'Lymphoma', n:'R-CHOP', full:'R-CHOP — rituximab, cyclophosphamide, doxorubicin, vincristine, prednisone', len:21, cyc:6},
+  {g:'Lymphoma', n:'ABVD', full:'ABVD — doxorubicin, bleomycin, vinblastine, dacarbazine', len:28, cyc:6},
+  {g:'Other', n:'Cisplatin + etoposide', full:'Cisplatin and etoposide', len:21, cyc:4},
+  {g:'Other', n:'Gemcitabine', full:'Gemcitabine', len:28, cyc:6}
+];
+
+/* The stretch when counts are usually lowest, scaled to the cycle length.
+   Too short a cycle and there is no meaningful window to mark. */
+function nadirRange(len){
+  if(len < 12) return null;
+  return [Math.max(2, Math.round(len*0.35)), Math.round(len*0.67)];
+}
+
 /* Medicines live in the saved data, not in this file, so this file stays
    free of anything personal. Load them with "Restore a backup". */
 const EMPTY_MEDS = {daily:[], byDay:{}, prn:[], flagNote:''};
@@ -402,12 +431,19 @@ function cyclePos(){
   const cyc = Math.floor(n/len)+1, day = (n%len)+1;
   return {cycle:Math.min(cyc,p.cycles||6), day, len, over:cyc>(p.cycles||6), cycleRaw:cyc};
 }
-function phaseOf(day){
-  if(day===1) return {t:'Infusion day', k:'', s:'A long stretch in the chair. Layers, a blanket, snacks, headphones, and a charger all help. The steroids can make tonight a restless one.'};
-  if(day<=3) return {t:'Days 2–3', k:'', s:'Often a steadier stretch — steroids can hold the tiredness off for a bit. If a growth-factor shot is part of the plan, bone aches can start around now.'};
-  if(day<=7) return {t:'Days 4–7', k:'', s:'Commonly the heaviest part of the cycle: tiredness, queasiness, aches, and food tasting strange. Taking the nausea medicine on schedule usually works better than waiting until it is bad.'};
-  if(day<=14) return {t:'Days 8–14 · lowest counts', k:'nadir', s:'White blood cell counts are usually at their lowest now, so infection is the thing to watch. This is the stretch where a fever matters most. Worth skipping crowds and anyone who is sick.'};
-  return {t:'Days 15–21 · usually the easier stretch', k:'', s:'Counts are typically climbing back. This is often the best window for a visit, an outing, or other appointments if the team says it is fine.'};
+function phaseOf(day, len){
+  len = len || 21;
+  const nad = nadirRange(len);
+  if(day===1) return {t:'Treatment day', k:'', s:'Often a long stretch in the chair. Layers, a blanket, snacks, headphones and a charger all help. If steroids are part of it, tonight can be a restless one.'};
+  if(!nad){
+    return day<=2
+      ? {t:'Just after treatment', k:'', s:'The day or two after is usually when side effects show up. Taking anti-nausea medicine on schedule tends to work better than waiting.'}
+      : {t:'Between treatments', k:'', s:'Usually the steadier part of a short cycle. A good window for appointments and seeing people, if the team says it is fine.'};
+  }
+  if(day <= Math.round(len*0.15)) return {t:'The first few days', k:'', s:'Often a steadier stretch — steroids can hold the tiredness off for a bit. If a growth-factor shot is part of the plan, bone aches can start around now.'};
+  if(day < nad[0]) return {t:'Days '+(Math.round(len*0.15)+1)+'–'+(nad[0]-1), k:'', s:'Commonly the heaviest part of the cycle: tiredness, queasiness, aches, and food tasting strange. Taking the nausea medicine on schedule usually works better than waiting until it is bad.'};
+  if(day <= nad[1]) return {t:'Days '+nad[0]+'–'+nad[1]+' · lowest counts', k:'nadir', s:'White blood cell counts are usually at their lowest now, so infection is the thing to watch. This is the stretch where a fever matters most. Worth skipping crowds and anyone who is sick.'};
+  return {t:'Days '+(nad[1]+1)+'–'+len+' · usually the easier stretch', k:'', s:'Counts are typically climbing back. This is often the best window for a visit, an outing, or other appointments if the team says it is fine.'};
 }
 
 /* ================= render ================= */
@@ -462,16 +498,17 @@ V.today = function(){
       <div class="big"><div class="day num">✓</div><div class="of">Past the last planned cycle.<br>Update the plan when the next step is set.</div></div>
       <button class="btn ghost" style="margin-top:6px" onclick="openSetup()">Update the plan</button></div>`;
   } else {
-    const ph = phaseOf(pos.day);
+    const ph = phaseOf(pos.day, pos.len);
     let band='';
     for(let d=1; d<=pos.len; d++){
-      const cls = [d===1?'infusion':'', (d>=8&&d<=14)?'nadir':'', d<pos.day?'past':'', d===pos.day?'today':''].filter(Boolean).join(' ');
+      const nr = nadirRange(pos.len);
+      const cls = [d===1?'infusion':'', (nr&&d>=nr[0]&&d<=nr[1])?'nadir':'', d<pos.day?'past':'', d===pos.day?'today':''].filter(Boolean).join(' ');
       band += `<i class="${cls}">${d}</i>`;
     }
     top = `<div class="orient">
       <div class="eyebrow">Cycle ${pos.cycle} of ${S.profile.cycles||6}</div>
       <div class="big"><div class="day num">Day ${pos.day}</div><div class="of">of ${pos.len}</div></div>
-      <div class="band">${band}</div>
+      <div class="band" style="grid-template-columns:repeat(${Math.min(pos.len,21)},1fr)">${band}</div>
       <div class="bandkey"><span><b style="background:var(--mark)"></b>Infusion</span><span><b style="background:var(--caution-soft)"></b>Lowest counts</span><span><b style="background:var(--ink)"></b>Today</span></div>
       <div class="phase ${ph.k}"><strong>${esc(ph.t)}</strong>${esc(ph.s)} <em>Everyone's pattern is a little different — the care team's word wins.</em></div>
     </div>`;
@@ -861,11 +898,27 @@ window.setG=(k,v)=>{ S.guidance[k]=v; save() };
 window.openSetup = ()=>{ const p=S.profile;
   sheet(`<h2>The plan</h2>
   <label class="field"><span>Name (optional)</span><input type="text" id="pName" value="${esc(p.name)}" placeholder="Whose board is this?"></label>
-  <label class="field"><span>Treatment</span><input type="text" id="pReg" value="${esc(p.regimen)}"></label>
+  <label class="field"><span>Treatment</span>
+    <select id="pPick" style="margin-bottom:8px">
+      <option value="">Choose a common regimen…</option>
+      ${['Breast','Colorectal','Lung','Lymphoma','Other'].map(g=>`<optgroup label="${g}">`+
+        REGIMENS.filter(r=>r.g===g).map((r,i)=>`<option value="${REGIMENS.indexOf(r)}">${esc(r.n)}</option>`).join('')+`</optgroup>`).join('')}
+    </select>
+    <input type="text" id="pReg" value="${esc(p.regimen)}" placeholder="Or type it in — whatever the team calls it">
+    <span class="sub" style="display:block;margin-top:6px;font-weight:400">Picking one fills in the usual cycle length and count. Both stay editable — the team's actual plan is what counts.</span></label>
   <label class="field"><span>First infusion date</span><input type="date" id="pC1" value="${esc(p.c1)}"></label>
   <div class="row"><label class="field" style="flex:1"><span>Days per cycle</span><input type="number" id="pLen" value="${p.cycleLen}"></label>
   <label class="field" style="flex:1"><span>Cycles planned</span><input type="number" id="pCyc" value="${p.cycles}"></label></div>
-  <button class="btn" onclick="saveSetup()">Save</button>`) };
+  <button class="btn" onclick="saveSetup()">Save</button>`); wireSetup(); };
+window.wireSetup = ()=>{
+  const pick=document.getElementById('pPick'); if(!pick) return;
+  pick.onchange = e=>{
+    const r = REGIMENS[e.target.value]; if(!r) return;
+    document.getElementById('pReg').value = r.full;
+    document.getElementById('pLen').value = r.len;
+    document.getElementById('pCyc').value = r.cyc;
+  };
+};
 window.saveSetup = ()=>{
   S.profile.name=document.getElementById('pName').value.trim();
   S.profile.regimen=document.getElementById('pReg').value.trim();
@@ -989,6 +1042,7 @@ window.go = t=>{
   window.scrollTo(0,0);
 };
 document.querySelectorAll('.tabbar button').forEach(b=>b.onclick=()=>go(b.dataset.tab));
+
 
 /* ---- offline (only works when served from a web address, not a local file) ---- */
 if('serviceWorker' in navigator && location.protocol.startsWith('http')){
