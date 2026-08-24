@@ -644,8 +644,11 @@ V.files = function(){
   h('v-files', `
     <div class="sectionhead"><h2>Papers</h2><span class="count">${S.files.length} saved</span></div>
     <input type="file" id="fileIn" multiple accept="image/*,application/pdf" style="display:none">
+    <input type="file" id="dirIn" webkitdirectory directory multiple style="display:none">
     <div class="row noprint" style="margin-bottom:14px">
       <button class="btn" onclick="document.getElementById('fileIn').click()">Add photos or PDFs</button>
+      ${('webkitdirectory' in document.createElement('input'))
+        ? `<button class="btn ghost" onclick="document.getElementById('dirIn').click()">Add a whole folder</button>` : ''}
     </div>
 
     ${queue.length?`<div class="card noprint" style="border-color:var(--caution)">
@@ -662,13 +665,17 @@ V.files = function(){
     ${list.length?`<div class="filegrid">${tiles}</div>`
       :`<div class="card"><div class="empty"><b>Nothing here yet</b>Photograph or download the pathology report, the treatment calendar, the port card, the insurance card — anything you would hate to dig for in a waiting room.</div></div>`}`);
   const inp=document.getElementById('fileIn'); if(inp) inp.onchange=onFiles;
+  const dir=document.getElementById('dirIn'); if(dir) dir.onchange=onFiles;
 };
 window.renameFile = (i,v)=>{ const f=S.files.find(x=>x.id===i); if(f&&v.trim()){ f.name=v.trim(); save(); V.files() } };
 window.togglePlan = i=>{ S.docPlan[i].have=!S.docPlan[i].have; save(); V.files() };
 window.setFilter = t=>{ fileFilter=t; V.files() };
 
 async function onFiles(e){
-  const files=[...e.target.files]; e.target.value='';
+  const files=[...e.target.files].filter(f=>
+    (f.type==='application/pdf'||f.type.startsWith('image/')) && !f.name.startsWith('.'));
+  e.target.value='';
+  if(!files.length) return alert('Nothing to add — no PDFs or images found there.');
   for(const f of files){
     const data = await new Promise(res=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=()=>res(null); r.readAsDataURL(f) });
     if(!data) continue;
@@ -680,12 +687,20 @@ async function onFiles(e){
     /* Filenames shaped like "2026-07-17 Pathology Consult Report [Pathology].pdf"
        file themselves: leading ISO date sets the date, [Tag] sets the category. */
     let nm = f.name, tag='Other', dstr=today();
+    /* Dropped in as a folder? If the folder is named after a category, use it. */
+    const rel = f.webkitRelativePath || '';
+    if(rel.includes('/')){
+      const parts = rel.split('/');
+      const folder = parts[parts.length-2] || '';
+      const hit = TAGS.find(t=>t.toLowerCase()===folder.trim().toLowerCase());
+      if(hit) tag = hit;
+    }
     const dm = nm.match(/^(\d{4}-\d{2}-\d{2})[ _-]+/);
     if(dm){ dstr = dm[1]; nm = nm.slice(dm[0].length); }
     const tm = nm.match(/\[([^\]]+)\]/);
     if(tm){
       const found = TAGS.find(t=>t.toLowerCase()===tm[1].trim().toLowerCase());
-      if(found){ tag = found; nm = nm.replace(tm[0],'').replace(/\s{2,}/g,' ').trim(); }
+      if(found){ if(tag==='Other') tag = found; nm = nm.replace(tm[0],'').replace(/\s{2,}/g,' ').trim(); }
     }
     nm = nm.replace(/\s+(\.[a-z0-9]+)$/i,'$1');
     S.files.push({id:fid,name:nm||f.name,mime:f.type,size:f.size,tag,added:Date.now(),dateStr:dstr,thumb});
