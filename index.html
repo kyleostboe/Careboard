@@ -708,15 +708,33 @@ function makeThumb(dataUrl){
   });
 }
 
-let vZoom=1, vHC=false, vCur=null;
+let vZoom=1, vHC=false, vCur=null, vBlobUrl=null;
+function b64ToBlob(dataUrl, mime){
+  const b64 = dataUrl.split(',')[1] || '';
+  const bin = atob(b64);
+  const bytes = new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
+  return new Blob([bytes], {type: mime});
+}
 window.openFile = async fid=>{
   const meta=S.files.find(f=>f.id===fid); if(!meta) return;
   vCur=meta; vZoom=1; vHC=false;
+  if(vBlobUrl){ URL.revokeObjectURL(vBlobUrl); vBlobUrl=null; }
   const data = await Store.get('file:'+fid);
   const stage=document.getElementById('vStage');
   document.getElementById('vName').textContent=meta.name;
   if(!data){ stage.innerHTML='<div class="empty" style="padding:40px">This file could not be opened. It may have been cleared by the browser.</div>' }
-  else if(meta.mime==='application/pdf'){ stage.innerHTML=`<iframe src="${data}"></iframe>` }
+  else if(meta.mime==='application/pdf'){
+    /* A raw data: URI inside an iframe fails silently on Android Chrome — the
+       phone's built-in PDF viewer only kicks in for a real object URL. */
+    try{
+      vBlobUrl = URL.createObjectURL(b64ToBlob(data, meta.mime));
+      stage.innerHTML = `<iframe src="${vBlobUrl}"></iframe>`;
+    }catch(e){
+      stage.innerHTML = `<div class="empty" style="padding:40px"><b>This PDF won't preview here</b>
+        <a href="${data}" download="${esc(meta.name)}" style="color:var(--mark);font-weight:700">Download it instead</a></div>`;
+    }
+  }
   else{ stage.innerHTML=`<img id="vImg" src="${data}" alt="${esc(meta.name)}" style="width:100%">` }
   document.getElementById('viewer').classList.add('on');
   sheetTagBar(meta);
@@ -734,7 +752,7 @@ window.promptRename=i=>{ const f=S.files.find(x=>x.id===i); const v=prompt('Name
 window.tagFile=(i,t)=>{ const f=S.files.find(x=>x.id===i); f.tag=t; save(); sheetTagBar(f); V.files() };
 window.delFile=async i=>{ if(!confirm('Remove this file from the board?')) return; await Store.del('file:'+i); S.files=S.files.filter(f=>f.id!==i); await save(); V.files(); closeViewer() };
 function applyZoom(){ const im=document.getElementById('vImg'); if(!im) return; im.style.width=(100*vZoom)+'%'; im.classList.toggle('hc',vHC) }
-function closeViewer(){ document.getElementById('viewer').classList.remove('on'); document.getElementById('vStage').innerHTML='' }
+function closeViewer(){ document.getElementById('viewer').classList.remove('on'); document.getElementById('vStage').innerHTML=''; if(vBlobUrl){ URL.revokeObjectURL(vBlobUrl); vBlobUrl=null; } }
 document.getElementById('vClose').onclick=closeViewer;
 document.getElementById('vIn').onclick=()=>{ vZoom=Math.min(vZoom*1.35,6); applyZoom() };
 document.getElementById('vOut').onclick=()=>{ vZoom=Math.max(vZoom/1.35,1); applyZoom() };
