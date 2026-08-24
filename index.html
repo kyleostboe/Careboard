@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F7F6F3">
+<title>Care Board</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Care Board">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" href="data:image/png;base64,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">
+<style>
+:root{
+  --paper:#F7F6F3;
+  --card:#FFFFFF;
+  --ink:#1C2733;
+  --muted:#6A7785;
+  --line:#E3E5E2;
+  --line-soft:#EFF0ED;
+  --mark:#2F6F6B;
+  --mark-soft:#E4EFEE;
+  --caution:#9A6B12;
+  --caution-soft:#F7EFDD;
+  --alarm:#A3242A;
+  --alarm-soft:#FBECEC;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(28,39,51,.05), 0 6px 18px rgba(28,39,51,.05);
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+}
+html[data-theme="dark"]{
+  --paper:#14181D;
+  --card:#1B2128;
+  --ink:#E8ECEF;
+  --muted:#96A3B0;
+  --line:#2C343D;
+  --line-soft:#232A31;
+  --mark:#79B8B2;
+  --mark-soft:#1E2E2E;
+  --caution:#D9AE5C;
+  --caution-soft:#2E2718;
+  --alarm:#E98A8A;
+  --alarm-soft:#2E1C1C;
+  --shadow:none;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:18px}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--font);font-size:1rem;line-height:1.55;
+  padding-bottom:calc(76px + env(safe-area-inset-bottom));
+  -webkit-text-size-adjust:100%;
+}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.02em;line-height:1.2}
+p{margin:0 0 .6em}
+button,input,textarea,select{font:inherit;color:inherit}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.eyebrow{font-family:var(--serif);font-style:italic;font-size:.78rem;color:var(--muted);letter-spacing:.01em}
+
+/* ---------- chrome ---------- */
+.topbar{
+  position:sticky;top:0;z-index:40;background:var(--paper);
+  border-bottom:1px solid var(--line);
+  padding:calc(8px + env(safe-area-inset-top)) 16px 8px;
+  display:flex;align-items:center;gap:8px;
+}
+.topbar .wordmark{font-size:.82rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-right:auto}
+.iconbtn{background:none;border:1px solid var(--line);border-radius:999px;padding:6px 11px;font-size:.78rem;font-weight:600;color:var(--muted);cursor:pointer}
+.iconbtn:active{background:var(--line-soft)}
+.callbtn{
+  background:var(--alarm-soft);border:1px solid var(--alarm);color:var(--alarm);
+  border-radius:999px;padding:7px 13px;font-size:.8rem;font-weight:700;cursor:pointer;white-space:nowrap;
+}
+main{padding:18px 16px 24px;max-width:720px;margin:0 auto}
+.view{display:none}
+.view.on{display:block;animation:rise .22s ease-out}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.view.on{animation:none}}
+
+.tabbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:var(--card);border-top:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(5,1fr);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.tabbar button{
+  background:none;border:0;padding:9px 2px 8px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  font-size:.66rem;font-weight:600;letter-spacing:.02em;color:var(--muted);
+}
+.tabbar button svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.tabbar button[aria-current="true"]{color:var(--mark)}
+
+/* ---------- blocks ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+.card h2{font-size:1.05rem;margin-bottom:2px}
+.sectionhead{display:flex;align-items:baseline;gap:10px;margin:26px 0 10px}
+.sectionhead h2{font-size:1.35rem}
+.sectionhead .count{margin-left:auto;font-size:.8rem;color:var(--muted)}
+.sub{color:var(--muted);font-size:.86rem}
+.hr{height:1px;background:var(--line-soft);margin:14px -16px}
+
+.btn{background:var(--mark);color:#fff;border:0;border-radius:11px;padding:12px 16px;font-weight:650;font-size:.92rem;cursor:pointer;width:100%}
+.btn:active{filter:brightness(.94)}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.btn.quiet{background:var(--mark-soft);color:var(--mark);border:0}
+.btn.danger{background:var(--card);color:var(--alarm);border:1px solid var(--line)}
+.btn.sm{padding:8px 12px;font-size:.82rem;width:auto;border-radius:9px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row>.btn{width:auto;flex:1 1 auto}
+
+label.field{display:block;margin-bottom:12px}
+label.field span{display:block;font-size:.78rem;font-weight:650;color:var(--muted);margin-bottom:5px;letter-spacing:.01em}
+input[type=text],input[type=date],input[type=time],input[type=number],input[type=tel],textarea,select{
+  width:100%;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-size:.95rem;
+}
+textarea{min-height:88px;resize:vertical;line-height:1.5}
+input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible{outline:2.5px solid var(--mark);outline-offset:2px}
+
+/* ---------- signature: the cycle band ---------- */
+.orient{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 16px 14px;margin-bottom:14px;box-shadow:var(--shadow)}
+.orient .big{display:flex;align-items:flex-end;gap:12px;margin:2px 0 4px}
+.orient .day{font-size:3.1rem;font-weight:750;line-height:.9}
+.orient .of{font-size:.95rem;color:var(--muted);padding-bottom:6px}
+.band{display:grid;grid-template-columns:repeat(21,1fr);gap:3px;margin:14px 0 8px}
+.band i{
+  height:30px;border-radius:4px;background:var(--line-soft);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.58rem;font-style:normal;color:var(--muted);font-variant-numeric:tabular-nums;
+}
+.band i.infusion{background:var(--mark);color:#fff;font-weight:700}
+.band i.nadir{background:var(--caution-soft);color:var(--caution)}
+.band i.past{opacity:.45}
+.band i.today{outline:2.5px solid var(--ink);outline-offset:1px;font-weight:800;color:var(--ink)}
+.band i.today.infusion{color:#fff}
+.bandkey{display:flex;gap:14px;font-size:.7rem;color:var(--muted);flex-wrap:wrap}
+.bandkey span{display:flex;align-items:center;gap:5px}
+.bandkey b{width:10px;height:10px;border-radius:3px;display:inline-block}
+.phase{background:var(--paper);border-radius:10px;padding:12px 13px;margin-top:12px;font-size:.9rem}
+.phase.nadir{background:var(--caution-soft)}
+.phase strong{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+.phase.nadir strong{color:var(--caution)}
+
+/* cycle map */
+.cyclemap{display:flex;flex-direction:column;gap:8px}
+.cyclerow{display:flex;align-items:center;gap:10px;font-size:.85rem}
+.cyclerow .lbl{width:74px;flex:none;color:var(--muted);font-weight:650}
+.cyclerow .bar{flex:1;height:26px;border-radius:6px;background:var(--line-soft);position:relative;overflow:hidden}
+.cyclerow .bar em{position:absolute;inset:0 auto 0 0;background:var(--mark-soft);font-style:normal}
+.cyclerow .bar i{position:absolute;top:0;bottom:0;width:3px;background:var(--mark);left:0}
+.cyclerow .dt{width:72px;flex:none;text-align:right;color:var(--muted);font-size:.75rem}
+.cyclerow.done .lbl{opacity:.5}
+
+/* lists */
+.item{display:flex;gap:11px;padding:13px 0;border-bottom:1px solid var(--line-soft);align-items:flex-start}
+.item:last-child{border-bottom:0}
+.item .body{flex:1;min-width:0}
+.item .body p{margin:0}
+.item .meta{font-size:.75rem;color:var(--muted);margin-top:3px}
+.item .x{background:none;border:0;color:var(--muted);font-size:1.1rem;cursor:pointer;padding:2px 4px;line-height:1}
+.check{width:26px;height:26px;flex:none;border-radius:7px;border:1.8px solid var(--line);background:var(--card);cursor:pointer;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.check.on{background:var(--mark);border-color:var(--mark);color:#fff;font-size:.85rem;font-weight:700}
+.done p{text-decoration:line-through;color:var(--muted)}
+.empty{text-align:center;padding:26px 12px;color:var(--muted);font-size:.9rem}
+.empty b{display:block;color:var(--ink);font-size:1rem;margin-bottom:4px}
+
+/* severity chips */
+.sx{padding:11px 0;border-bottom:1px solid var(--line-soft)}
+.sx:last-of-type{border-bottom:0}
+.sx .name{font-size:.9rem;font-weight:600;margin-bottom:7px}
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.chips button{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:9px 4px;font-size:.76rem;font-weight:600;color:var(--muted);cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--mark);border-color:var(--mark);color:#fff}
+.chips button[aria-pressed="true"][data-v="3"]{background:var(--caution);border-color:var(--caution)}
+
+/* files */
+.filegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;text-align:left;padding:0;display:flex;flex-direction:column}
+.tile .thumb{height:104px;background:var(--line-soft);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.74rem;font-weight:700;letter-spacing:.06em}
+.tile .thumb img{width:100%;height:100%;object-fit:cover}
+.tile .cap{padding:9px 10px}
+.tile .cap b{display:block;font-size:.82rem;font-weight:650;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tile .cap span{font-size:.7rem;color:var(--muted)}
+.tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mark);background:var(--mark-soft);padding:2px 7px;border-radius:5px}
+.tagrow{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:12px;-webkit-overflow-scrolling:touch}
+.tagrow button{flex:none;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:.8rem;font-weight:600;color:var(--muted);cursor:pointer}
+.tagrow button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.fileq{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px;background:var(--paper)}
+.fileq input[type=text]{background:var(--card);margin-bottom:8px}
+.fileq .chips2{display:flex;gap:6px;flex-wrap:wrap}
+.fileq .chips2 button{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 11px;font-size:.78rem;font-weight:600;color:var(--muted);cursor:pointer}
+.plan{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line-soft);font-size:.87rem}
+.plan:last-child{border-bottom:0}
+.plan .box{width:22px;height:22px;flex:none;border-radius:6px;border:1.8px solid var(--line);background:var(--card);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;margin-top:1px}
+.plan .box.on{background:var(--mark);border-color:var(--mark);color:#fff}
+.plan.done span{color:var(--muted);text-decoration:line-through}
+.plan .t{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-left:auto;flex:none;padding-top:3px}
+
+/* modal */
+.scrim{position:fixed;inset:0;background:rgba(20,26,32,.5);z-index:100;display:none;align-items:flex-end;justify-content:center}
+.scrim.on{display:flex}
+.sheet{background:var(--card);width:100%;max-width:640px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:20px 18px calc(24px + env(safe-area-inset-bottom))}
+.sheet h2{font-size:1.2rem;margin-bottom:10px}
+.sheet .grab{width:38px;height:4px;background:var(--line);border-radius:2px;margin:-8px auto 14px}
+@media(min-width:700px){.scrim{align-items:center}.sheet{border-radius:18px;max-height:86vh}}
+
+/* viewer */
+.viewer{position:fixed;inset:0;background:var(--paper);z-index:120;display:none;flex-direction:column}
+.viewer.on{display:flex}
+.viewer .vbar{display:flex;gap:6px;align-items:center;padding:calc(8px + env(safe-area-inset-top)) 12px 8px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.viewer .vbar .name{font-size:.82rem;font-weight:650;margin-right:auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:44%}
+.viewer .stage{flex:1;overflow:auto;background:var(--line-soft);display:block;text-align:center}
+.viewer .stage img{max-width:none;display:inline-block;transform-origin:top center;background:#fff}
+.viewer .stage iframe{width:100%;height:100%;border:0;background:#fff}
+.viewer .stage img.hc{filter:contrast(1.45) grayscale(1) brightness(1.05)}
+
+/* call sheet */
+.alarmlist li{margin-bottom:9px}
+.alarmlist{padding-left:20px;margin:0 0 14px}
+.calllink{display:flex;align-items:center;gap:12px;padding:13px 14px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;text-decoration:none;color:inherit;background:var(--paper)}
+.calllink b{display:block;font-size:.95rem}
+.calllink span{font-size:.78rem;color:var(--muted)}
+.calllink .go{margin-left:auto;color:var(--mark);font-weight:700;font-size:.85rem}
+.banner{background:var(--alarm-soft);border:1px solid var(--alarm);color:var(--alarm);border-radius:12px;padding:13px 14px;margin-bottom:14px;font-size:.88rem;font-weight:600}
+.notice{background:var(--caution-soft);color:var(--caution);border-radius:10px;padding:10px 12px;font-size:.8rem;margin-bottom:12px}
+.foot{font-size:.75rem;color:var(--muted);text-align:center;padding:18px 8px 4px;line-height:1.5}
+
+@media print{
+  .topbar,.tabbar,.noprint{display:none!important}
+  body{padding:0;background:#fff}
+  .card{box-shadow:none;break-inside:avoid}
+  html{font-size:12pt}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wordmark" id="wordmark">Care Board</div>
+  <button class="iconbtn" id="sizeBtn" title="Text size">A<sup>+</sup></button>
+  <button class="iconbtn" id="themeBtn" title="Light or dark">☾</button>
+  <button class="callbtn" id="callBtn">When to call</button>
+</div>
+
+<main>
+  <div id="storeWarn" class="notice" style="display:none">Heads up: this preview can't save anything permanently. Download the file and open it from your own device or web address, and everything you enter will stick.</div>
+
+  <!-- TODAY -->
+  <section class="view on" id="v-today"></section>
+  <!-- LOG -->
+  <section class="view" id="v-log"></section>
+  <!-- QUESTIONS -->
+  <section class="view" id="v-ask"></section>
+  <!-- FILES -->
+  <section class="view" id="v-files"></section>
+  <!-- PLAN -->
+  <section class="view" id="v-plan"></section>
+
+  <div class="foot noprint">Everything stays on this device. Nothing is uploaded anywhere.<br>Not medical advice — the care team's instructions always come first.</div>
+</main>
+
+<nav class="tabbar">
+  <button data-tab="today" aria-current="true"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/></svg>Today</button>
+  <button data-tab="log"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-7.5-9.8A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 3.1c0 5.2-7.5 9.8-7.5 9.8Z"/></svg>Log</button>
+  <button data-tab="ask"><svg viewBox="0 0 24 24"><path d="M9.2 9a2.9 2.9 0 1 1 3.6 2.8c-.6.2-1 .8-1 1.5v.6"/><circle cx="11.8" cy="17.4" r=".9" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="8.6"/></svg>Questions</button>
+  <button data-tab="files"><svg viewBox="0 0 24 24"><path d="M4 6.5A1.5 1.5 0 0 1 5.5 5h3.7l1.8 2.2h7.5A1.5 1.5 0 0 1 20 8.7v9.8A1.5 1.5 0 0 1 18.5 20h-13A1.5 1.5 0 0 1 4 18.5Z"/></svg>Papers</button>
+  <button data-tab="plan"><svg viewBox="0 0 24 24"><rect x="3.8" y="5.2" width="16.4" height="15" rx="2"/><path d="M3.8 10h16.4M8.5 3.4v3.6M15.5 3.4v3.6"/></svg>Plan</button>
+</nav>
+
+<div class="scrim" id="scrim"><div class="sheet" id="sheet"><div class="grab"></div><div id="sheetBody"></div></div></div>
+
+<div class="viewer" id="viewer">
+  <div class="vbar">
+    <button class="iconbtn" id="vClose">Close</button>
+    <div class="name" id="vName"></div>
+    <button class="iconbtn" id="vOut">−</button>
+    <button class="iconbtn" id="vIn">+</button>
+    <button class="iconbtn" id="vFit">Fit</button>
+    <button class="iconbtn" id="vHC">Sharpen</button>
+  </div>
+  <div class="stage" id="vStage"></div>
+</div>
+
+<script>
+"use strict";
+
+/* ================= storage ================= */
+const MEM = {};
+const Store = {
+  db:null, ok:false,
+  async open(){
+    return new Promise(res=>{
+      let done=false; const finish=v=>{if(!done){done=true;res(v)}};
+      try{
+        const r = indexedDB.open('careboard',1);
+        r.onupgradeneeded = ()=>{ try{ r.result.createObjectStore('kv') }catch(e){} };
+        r.onsuccess = ()=>{ this.db=r.result; this.ok=true; finish(true) };
+        r.onerror = ()=> finish(false);
+        r.onblocked = ()=> finish(false);
+        setTimeout(()=>finish(this.ok), 1500);
+      }catch(e){ finish(false) }
+    });
+  },
+  async get(k){
+    if(!this.ok) return MEM[k];
+    return new Promise(res=>{
+      try{
+        const rq = this.db.transaction('kv','readonly').objectStore('kv').get(k);
+        rq.onsuccess=()=>res(rq.result); rq.onerror=()=>res(undefined);
+      }catch(e){ res(MEM[k]) }
+    });
+  },
+  async set(k,v){
+    if(!this.ok){ MEM[k]=v; return }
+    return new Promise(res=>{
+      try{
+        const rq = this.db.transaction('kv','readwrite').objectStore('kv').put(v,k);
+        rq.onsuccess=()=>res(); rq.onerror=()=>{ MEM[k]=v; res() };
+      }catch(e){ MEM[k]=v; res() }
+    });
+  },
+  async del(k){
+    if(!this.ok){ delete MEM[k]; return }
+    return new Promise(res=>{
+      try{ const rq=this.db.transaction('kv','readwrite').objectStore('kv').delete(k); rq.onsuccess=()=>res(); rq.onerror=()=>res() }
+      catch(e){ res() }
+    });
+  }
+};
+
+/* ================= state ================= */
+const SX = [
+  {k:'nausea',   n:'Nausea or throwing up'},
+  {k:'diarrhea', n:'Diarrhea or loose stools'},
+  {k:'mouth',    n:'Mouth or throat sores'},
+  {k:'fatigue',  n:'Tiredness'},
+  {k:'aches',    n:'Bone or muscle aches'},
+  {k:'neuro',    n:'Tingling or numbness in hands/feet'},
+  {k:'appetite', n:'Trouble eating or drinking'},
+  {k:'skin',     n:'Rash, dry skin, or nail changes'}
+];
+const LEVELS = ['None','Mild','Moderate','Bad'];
+const TAGS = ['Pathology','Imaging','Heart','Labs','Notes','Instructions','Insurance','Consents','Other'];
+
+/* Medicines live in the saved data, not in this file, so this file stays
+   free of anything personal. Load them with "Restore a backup". */
+const EMPTY_MEDS = {daily:[], byDay:{}, prn:[], flagNote:''};
+
+const SEED_Q = [
+  'What number do we call after hours and on weekends?',
+  'At exactly what temperature should we call, and should Tylenol be avoided before calling?',
+  'Which growth-factor shot is being given, and on what day?',
+  'Is scalp cooling available here, and does the clinic help arrange it?',
+  'Should hands and feet be iced during the infusion to protect against neuropathy?',
+  'What anti-nausea medicines are there for home, and what if the first one is not enough?',
+  'When is the next heart scan (ECHO), and how often after that?',
+  'How do we care for the port, and what should we watch for at the site?',
+  'What does the plan look like after these cycles?',
+  'Can we get printed copies of the pathology report for our own folder?',
+  'Is there a nurse navigator, a dietitian, and a social worker we can meet?',
+  'Are there copay assistance programs for these drugs?'
+];
+
+let S = null;
+const blank = ()=>({
+  v:2,
+  profile:{name:'', regimen:'', c1:'', cycleLen:21, cycles:6},
+  prefs:{scale:1, theme:'light', setup:false},
+  meds:{daily:[], byDay:{}, prn:[], flagNote:''},
+  contacts:[
+    {id:id(), name:'Oncology office', role:'Weekdays', phone:''},
+    {id:id(), name:'After-hours / on-call line', role:'Nights and weekends', phone:''},
+    {id:id(), name:'Infusion center', role:'', phone:''},
+    {id:id(), name:'Pharmacy', role:'', phone:''}
+  ],
+  appts:[], questions:[], logs:[], files:[], docPlan:[],
+  meta:{lastChange:Date.now(), lastExport:0},
+  guidance:{diet:'', movement:'', other:''}
+});
+
+
+function id(){ return Math.random().toString(36).slice(2,10) }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])) }
+async function save(){ if(S.meta) S.meta.lastChange = Date.now(); await Store.set('state', JSON.parse(JSON.stringify(S))) }
+
+/* ================= dates ================= */
+function today(){ const d=new Date(); return ymd(d) }
+function ymd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0') }
+function parseYmd(s){ if(!s) return null; const p=s.split('-').map(Number); return new Date(p[0],p[1]-1,p[2]) }
+function addDays(d,n){ const x=new Date(d.getTime()); x.setDate(x.getDate()+n); return x }
+function daysBetween(a,b){ return Math.round((b.setHours(0,0,0,0)-a.setHours(0,0,0,0))/864e5) }
+function pretty(s){ const d=parseYmd(s); if(!d) return ''; return d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'}) }
+function prettyShort(d){ return d.toLocaleDateString(undefined,{month:'short',day:'numeric'}) }
+
+function cyclePos(){
+  const p = S.profile; if(!p.c1) return null;
+  const start = parseYmd(p.c1); const n = daysBetween(new Date(start.getTime()), new Date());
+  const len = p.cycleLen||21;
+  if(n < 0) return {before:true, until:-n, start:parseYmd(p.c1)};
+  const cyc = Math.floor(n/len)+1, day = (n%len)+1;
+  return {cycle:Math.min(cyc,p.cycles||6), day, len, over:cyc>(p.cycles||6), cycleRaw:cyc};
+}
+function phaseOf(day){
+  if(day===1) return {t:'Infusion day', k:'', s:'A long stretch in the chair. Layers, a blanket, snacks, headphones, and a charger all help. The steroids can make tonight a restless one.'};
+  if(day<=3) return {t:'Days 2–3', k:'', s:'Often a steadier stretch — steroids can hold the tiredness off for a bit. If a growth-factor shot is part of the plan, bone aches can start around now.'};
+  if(day<=7) return {t:'Days 4–7', k:'', s:'Commonly the heaviest part of the cycle: tiredness, queasiness, aches, and food tasting strange. Taking the nausea medicine on schedule usually works better than waiting until it is bad.'};
+  if(day<=14) return {t:'Days 8–14 · lowest counts', k:'nadir', s:'White blood cell counts are usually at their lowest now, so infection is the thing to watch. This is the stretch where a fever matters most. Worth skipping crowds and anyone who is sick.'};
+  return {t:'Days 15–21 · usually the easier stretch', k:'', s:'Counts are typically climbing back. This is often the best window for a visit, an outing, or other appointments if the team says it is fine.'};
+}
+
+/* ================= render ================= */
+const V = {};
+function h(el, html){ document.getElementById(el).innerHTML = html }
+
+function render(){
+  document.documentElement.style.fontSize = (16 + (S.prefs.scale-1)*3) + 'px';
+  document.documentElement.setAttribute('data-theme', S.prefs.theme);
+  document.getElementById('wordmark').textContent = S.profile.name ? S.profile.name + "'s board" : 'Care Board';
+  V.today(); V.log(); V.ask(); V.files(); V.plan();
+}
+
+/* ---- TODAY ---- */
+function medCard(pos){
+  const has = S.meds && (S.meds.daily.length||S.meds.prn.length||Object.keys(S.meds.byDay).length);
+  if(!has){
+    return `<div class="card"><h2>Medicines</h2>
+      <p class="sub" style="margin:6px 0 12px">Nothing listed yet.</p>
+      <button class="btn ghost sm noprint" onclick="go('plan')">Add medicines</button></div>`;
+  }
+  const M = S.meds;
+  const day = (pos && !pos.before && !pos.over) ? pos.day : 0;
+  const todayMeds = (M.byDay[day]||[]);
+  const rows = m=>`<div class="item"><div class="body"><p><b>${esc(m.n)}</b></p><div class="meta">${esc(m.d)}${m.note?'<br>'+esc(m.note):''}</div></div>${m.flag?'<span class="tag" style="color:var(--caution);background:var(--caution-soft)">Ask</span>':''}</div>`;
+  return `<div class="card">
+    <div style="display:flex;align-items:baseline"><h2>Medicines</h2>
+      <button class="btn sm quiet noprint" style="margin-left:auto" onclick="go('plan')">Edit list →</button></div>
+    ${todayMeds.length?`<div class="phase" style="margin:10px 0 2px"><strong>Today — day ${day}</strong></div>${todayMeds.map(rows).join('')}`
+      :`<p class="sub" style="margin:6px 0 0">Nothing extra scheduled for today beyond the daily list.</p>`}
+    ${M.daily.length?`<div class="hr"></div><div class="eyebrow">Every day</div>${M.daily.map(rows).join('')}`:''}
+    ${M.prn.length?`<div class="hr"></div><div class="eyebrow">As needed</div>${M.prn.map(rows).join('')}`:''}
+    ${M.flagNote?`<div class="notice" style="margin:12px 0 0">${esc(M.flagNote)}</div>`:''}
+  </div>`;
+}
+
+V.today = function(){
+  const pos = cyclePos(); let top='';
+  if(!S.profile.c1){
+    top = `<div class="card"><h2>Let's set the calendar</h2>
+      <p class="sub" style="margin:6px 0 14px">Add the first infusion date and the rest of the board fills itself in.</p>
+      <button class="btn" onclick="openSetup()">Set up the plan</button></div>`;
+  } else if(pos.before){
+    const d = pos.start;
+    top = `<div class="orient">
+      <div class="eyebrow">Counting down</div>
+      <div class="big"><div class="day num">${pos.until}</div><div class="of">day${pos.until===1?'':'s'} until the first infusion,<br>${esc(prettyShort(d))}</div></div>
+      <div class="phase"><strong>Before day one</strong>A short list is worth having ready: comfortable layers, a blanket, a water bottle, lip balm, snacks that are easy on the stomach, a charger, and something to watch or listen to. Fill the nausea prescriptions before that morning if they are not already at home.</div>
+    </div>`;
+  } else if(pos.over){
+    top = `<div class="orient"><div class="eyebrow">Where things stand</div>
+      <div class="big"><div class="day num">✓</div><div class="of">Past the last planned cycle.<br>Update the plan when the next step is set.</div></div>
+      <button class="btn ghost" style="margin-top:6px" onclick="openSetup()">Update the plan</button></div>`;
+  } else {
+    const ph = phaseOf(pos.day);
+    let band='';
+    for(let d=1; d<=pos.len; d++){
+      const cls = [d===1?'infusion':'', (d>=8&&d<=14)?'nadir':'', d<pos.day?'past':'', d===pos.day?'today':''].filter(Boolean).join(' ');
+      band += `<i class="${cls}">${d}</i>`;
+    }
+    top = `<div class="orient">
+      <div class="eyebrow">Cycle ${pos.cycle} of ${S.profile.cycles||6}</div>
+      <div class="big"><div class="day num">Day ${pos.day}</div><div class="of">of ${pos.len}</div></div>
+      <div class="band">${band}</div>
+      <div class="bandkey"><span><b style="background:var(--mark)"></b>Infusion</span><span><b style="background:var(--caution-soft)"></b>Lowest counts</span><span><b style="background:var(--ink)"></b>Today</span></div>
+      <div class="phase ${ph.k}"><strong>${esc(ph.t)}</strong>${esc(ph.s)} <em>Everyone's pattern is a little different — the care team's word wins.</em></div>
+    </div>`;
+  }
+
+  const upcoming = S.appts.filter(a=>a.date>=today()).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,3);
+  const appts = upcoming.length
+    ? upcoming.map(a=>`<div class="item"><div class="body"><p><b>${esc(a.what)}</b></p><div class="meta">${esc(pretty(a.date))}${a.time?' · '+esc(a.time):''}${a.where?' · '+esc(a.where):''}</div></div></div>`).join('')
+    : `<div class="empty" style="padding:14px"><b>No appointments saved</b>Add them under Plan.</div>`;
+
+  const openCount = S.questions.filter(q=>!q.asked).length;
+  const logged = S.logs.some(l=>l.date===today());
+
+  h('v-today', top + `
+    <div class="row" style="margin-bottom:14px">
+      <button class="btn ${logged?'quiet':''}" onclick="go('log')">${logged?'Update today':'How is today going?'}</button>
+      <button class="btn ghost" onclick="openQ()">Add a question</button>
+    </div>
+    ${medCard(pos)}
+    <div class="card"><h2>Coming up</h2><div style="margin-top:4px">${appts}</div></div>
+    <div class="card" onclick="go('ask')" style="cursor:pointer">
+      <h2>${openCount} question${openCount===1?'':'s'} saved for the next visit</h2>
+      <p class="sub" style="margin:4px 0 0">Tap to read through them before the appointment.</p>
+    </div>`);
+};
+
+/* ---- LOG ---- */
+V.log = function(){
+  const t = today();
+  let L = S.logs.find(l=>l.date===t);
+  const sx = (L&&L.sx)||{};
+  const rows = SX.map(s=>`<div class="sx"><div class="name">${esc(s.n)}</div><div class="chips">`+
+    LEVELS.map((lv,i)=>`<button data-v="${i}" aria-pressed="${(sx[s.k]||0)===i}" onclick="setSx('${s.k}',${i})">${lv}</button>`).join('')+
+    `</div></div>`).join('');
+
+  const recent = S.logs.slice().sort((a,b)=>b.date.localeCompare(a.date)).slice(0,14).map(l=>{
+    const bad = SX.filter(s=>(l.sx&&l.sx[s.k])>=2).map(s=>s.n.split(' ')[0]);
+    const tempTxt = l.temp ? `<span class="num">${esc(l.temp)}°</span> · ` : '';
+    return `<div class="item"><div class="body"><p><b>${esc(pretty(l.date))}</b></p>
+      <div class="meta">${tempTxt}${bad.length?esc(bad.join(', ')):'nothing marked moderate or worse'}${l.note?' · '+esc(l.note.slice(0,70)):''}</div></div></div>`;
+  }).join('') || `<div class="empty"><b>Nothing logged yet</b>Even a couple of taps a day gives the nurses something real to look at.</div>`;
+
+  h('v-log', `
+    <div class="sectionhead"><h2>Today</h2><span class="count">${esc(pretty(t))}</span></div>
+    <div class="card">
+      <label class="field"><span>Temperature, if taken</span>
+        <input type="number" step="0.1" inputmode="decimal" id="tempIn" value="${L&&L.temp?esc(L.temp):''}" placeholder="e.g. 98.6" onchange="setTemp(this.value)"></label>
+      <div id="tempAlert"></div>
+      <div class="hr"></div>
+      ${rows}
+      <div class="hr"></div>
+      <label class="field"><span>Anything else worth remembering</span>
+        <textarea id="noteIn" placeholder="Slept well. Soup went down fine. Bone aches started after lunch." onchange="setNote(this.value)">${L&&L.note?esc(L.note):''}</textarea></label>
+      <p class="sub" style="margin:0">Saved as you go. Nothing here is a score, and skipping days is fine.</p>
+    </div>
+    <div class="sectionhead"><h2>Recent days</h2></div>
+    <div class="card">${recent}</div>
+    <button class="btn ghost noprint" onclick="printSheet()">Print a summary for the appointment</button>`);
+  tempCheck();
+};
+
+function ensureLog(){
+  const t=today(); let L=S.logs.find(l=>l.date===t);
+  if(!L){ L={id:id(),date:t,sx:{},note:'',temp:''}; S.logs.push(L) } return L;
+}
+window.setSx = (k,v)=>{ const L=ensureLog(); L.sx[k]=v; save(); V.log(); V.today() };
+window.setTemp = v=>{ const L=ensureLog(); L.temp=v; save(); tempCheck() };
+window.setNote = v=>{ const L=ensureLog(); L.note=v; save() };
+function tempCheck(){
+  const el=document.getElementById('tempAlert'); if(!el) return;
+  const L=S.logs.find(l=>l.date===today()); const t=L&&parseFloat(L.temp);
+  const hot = t && (t>=100.4 || (t>=37.8 && t<45));
+  el.innerHTML = hot ? `<div class="banner">That is a fever range. Most oncology teams want a call right away — not in the morning. <button class="btn sm" style="margin-top:8px;background:var(--alarm);color:#fff" onclick="openCall()">Open the call list</button></div>` : '';
+}
+
+/* ---- QUESTIONS ---- */
+V.ask = function(){
+  const open = S.questions.filter(q=>!q.asked);
+  const done = S.questions.filter(q=>q.asked);
+  const li = q=>`<div class="item ${q.asked?'done':''}">
+      <button class="check ${q.asked?'on':''}" onclick="toggleQ('${q.id}')" aria-label="Mark asked">${q.asked?'✓':''}</button>
+      <div class="body"><p>${esc(q.text)}</p>
+        ${q.answer?`<div class="meta"><b>Answer:</b> ${esc(q.answer)}</div>`:''}
+        <button class="btn sm quiet noprint" style="margin-top:7px" onclick="answerQ('${q.id}')">${q.answer?'Edit the answer':'Write down the answer'}</button>
+      </div>
+      <button class="x noprint" onclick="delQ('${q.id}')" aria-label="Remove">×</button></div>`;
+
+  h('v-ask', `
+    <div class="sectionhead"><h2>Questions</h2><span class="count">${open.length} to ask</span></div>
+    <button class="btn noprint" style="margin-bottom:14px" onclick="openQ()">Add a question</button>
+    <div class="card">${open.length?open.map(li).join(''):`<div class="empty"><b>Nothing waiting</b>Anything that comes to mind at 2am goes here.</div>`}</div>
+    ${done.length?`<div class="sectionhead"><h2>Already asked</h2></div><div class="card">${done.map(li).join('')}</div>`:''}`);
+};
+window.openQ = ()=> sheet(`<h2>Add a question</h2>
+  <label class="field"><span>What do you want to ask?</span><textarea id="qText" placeholder="Is tingling in the fingertips something to report now, or is it expected?"></textarea></label>
+  <button class="btn" onclick="addQ()">Save it</button>`);
+window.addQ = ()=>{ const t=document.getElementById('qText').value.trim(); if(t){ S.questions.unshift({id:id(),text:t,asked:false,answer:''}); save(); V.ask(); V.today() } closeSheet() };
+window.toggleQ = i=>{ const q=S.questions.find(x=>x.id===i); q.asked=!q.asked; save(); V.ask(); V.today() };
+window.delQ = i=>{ S.questions=S.questions.filter(x=>x.id!==i); save(); V.ask(); V.today() };
+window.answerQ = i=>{ const q=S.questions.find(x=>x.id===i);
+  sheet(`<h2>What did they say?</h2><p class="sub" style="margin-bottom:12px">${esc(q.text)}</p>
+  <label class="field"><textarea id="aText">${esc(q.answer)}</textarea></label>
+  <button class="btn" onclick="saveA('${i}')">Save</button>`) };
+window.saveA = i=>{ const q=S.questions.find(x=>x.id===i); q.answer=document.getElementById('aText').value.trim(); if(q.answer) q.asked=true; save(); V.ask(); closeSheet() };
+
+/* ---- FILES ---- */
+let fileFilter='All';
+V.files = function(){
+  const list = fileFilter==='All' ? S.files : S.files.filter(f=>f.tag===fileFilter);
+  const tiles = list.slice().sort((a,b)=>(b.dateStr||'').localeCompare(a.dateStr||'')||b.added-a.added).map(f=>`
+    <button class="tile" onclick="openFile('${f.id}')">
+      <div class="thumb">${f.thumb?`<img src="${f.thumb}" alt="">`:esc((f.name.split('.').pop()||'FILE').toUpperCase())}</div>
+      <div class="cap"><b>${esc(f.name)}</b><span>${esc(f.tag)}${f.dateStr?' · '+esc(pretty(f.dateStr)):''}</span></div>
+    </button>`).join('');
+
+  /* Anything still sitting in Other is treated as unfiled and surfaced for naming + tagging. */
+  const queue = S.files.filter(f=>f.tag==='Other').slice().sort((a,b)=>a.added-b.added);
+  const qHtml = queue.map(f=>`
+    <div class="fileq">
+      <input type="text" value="${esc(f.name)}" onchange="renameFile('${f.id}',this.value)" placeholder="Give it a name that's easy to spot later">
+      <div class="chips2">${TAGS.filter(t=>t!=='Other').map(t=>`<button onclick="tagFile('${f.id}','${t}')">${t}</button>`).join('')}
+        <button style="color:var(--mark)" onclick="openFile('${f.id}')">Open</button></div>
+    </div>`).join('');
+
+  const plan = (S.docPlan||[]);
+  const planLeft = plan.filter(x=>!x.have).length;
+  const planHtml = plan.map((x,i)=>`
+    <div class="plan ${x.have?'done':''}">
+      <button class="box ${x.have?'on':''}" onclick="togglePlan(${i})" aria-label="Got it">${x.have?'✓':''}</button>
+      <span>${esc(x.label)}</span><span class="t">${esc(x.tag)}</span>
+    </div>`).join('');
+
+  h('v-files', `
+    <div class="sectionhead"><h2>Papers</h2><span class="count">${S.files.length} saved</span></div>
+    <input type="file" id="fileIn" multiple accept="image/*,application/pdf" style="display:none">
+    <div class="row noprint" style="margin-bottom:14px">
+      <button class="btn" onclick="document.getElementById('fileIn').click()">Add photos or PDFs</button>
+    </div>
+
+    ${queue.length?`<div class="card noprint" style="border-color:var(--caution)">
+      <h2>Needs filing</h2>
+      <p class="sub" style="margin:4px 0 12px">${queue.length} item${queue.length===1?'':'s'} still unsorted. Name each one and tap where it belongs.</p>
+      ${qHtml}</div>`:''}
+
+    ${plan.length?`<div class="card noprint">
+      <h2>Collection checklist</h2>
+      <p class="sub" style="margin:4px 0 10px">${planLeft?planLeft+' still to gather from the portal.':'Everything on the list is in.'}</p>
+      ${planHtml}</div>`:''}
+
+    <div class="tagrow noprint">${['All'].concat(TAGS).map(t=>`<button aria-pressed="${fileFilter===t}" onclick="setFilter('${t}')">${t}</button>`).join('')}</div>
+    ${list.length?`<div class="filegrid">${tiles}</div>`
+      :`<div class="card"><div class="empty"><b>Nothing here yet</b>Photograph or download the pathology report, the treatment calendar, the port card, the insurance card — anything you would hate to dig for in a waiting room.</div></div>`}`);
+  const inp=document.getElementById('fileIn'); if(inp) inp.onchange=onFiles;
+};
+window.renameFile = (i,v)=>{ const f=S.files.find(x=>x.id===i); if(f&&v.trim()){ f.name=v.trim(); save(); V.files() } };
+window.togglePlan = i=>{ S.docPlan[i].have=!S.docPlan[i].have; save(); V.files() };
+window.setFilter = t=>{ fileFilter=t; V.files() };
+
+async function onFiles(e){
+  const files=[...e.target.files]; e.target.value='';
+  for(const f of files){
+    const data = await new Promise(res=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=()=>res(null); r.readAsDataURL(f) });
+    if(!data) continue;
+    const fid=id();
+    let thumb='';
+    if(f.type.startsWith('image/')) thumb = await makeThumb(data);
+    await Store.set('file:'+fid, data);
+
+    /* Filenames shaped like "2026-07-17 Pathology Consult Report [Pathology].pdf"
+       file themselves: leading ISO date sets the date, [Tag] sets the category. */
+    let nm = f.name, tag='Other', dstr=today();
+    const dm = nm.match(/^(\d{4}-\d{2}-\d{2})[ _-]+/);
+    if(dm){ dstr = dm[1]; nm = nm.slice(dm[0].length); }
+    const tm = nm.match(/\[([^\]]+)\]/);
+    if(tm){
+      const found = TAGS.find(t=>t.toLowerCase()===tm[1].trim().toLowerCase());
+      if(found){ tag = found; nm = nm.replace(tm[0],'').replace(/\s{2,}/g,' ').trim(); }
+    }
+    nm = nm.replace(/\s+(\.[a-z0-9]+)$/i,'$1');
+    S.files.push({id:fid,name:nm||f.name,mime:f.type,size:f.size,tag,added:Date.now(),dateStr:dstr,thumb});
+  }
+  await save(); V.files();
+}
+function makeThumb(dataUrl){
+  return new Promise(res=>{
+    const img=new Image();
+    img.onload=()=>{ try{
+      const c=document.createElement('canvas'); const s=Math.min(280/img.width,280/img.height,1);
+      c.width=img.width*s; c.height=img.height*s;
+      c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+      res(c.toDataURL('image/jpeg',.6));
+    }catch(e){ res('') } };
+    img.onerror=()=>res('');
+    img.src=dataUrl;
+  });
+}
+
+let vZoom=1, vHC=false, vCur=null;
+window.openFile = async fid=>{
+  const meta=S.files.find(f=>f.id===fid); if(!meta) return;
+  vCur=meta; vZoom=1; vHC=false;
+  const data = await Store.get('file:'+fid);
+  const stage=document.getElementById('vStage');
+  document.getElementById('vName').textContent=meta.name;
+  if(!data){ stage.innerHTML='<div class="empty" style="padding:40px">This file could not be opened. It may have been cleared by the browser.</div>' }
+  else if(meta.mime==='application/pdf'){ stage.innerHTML=`<iframe src="${data}"></iframe>` }
+  else{ stage.innerHTML=`<img id="vImg" src="${data}" alt="${esc(meta.name)}" style="width:100%">` }
+  document.getElementById('viewer').classList.add('on');
+  sheetTagBar(meta);
+};
+function sheetTagBar(meta){
+  const bar=document.querySelector('#viewer .vbar');
+  let old=document.getElementById('vTags'); if(old) old.remove();
+  const div=document.createElement('div'); div.id='vTags'; div.className='tagrow'; div.style.cssText='width:100%;margin:6px 0 0';
+  div.innerHTML = TAGS.map(t=>`<button aria-pressed="${meta.tag===t}" onclick="tagFile('${meta.id}','${t}')">${t}</button>`).join('')
+    + `<button onclick="promptRename('${meta.id}')">Rename</button>`
+    + `<button style="color:var(--alarm)" onclick="delFile('${meta.id}')">Remove</button>`;
+  bar.appendChild(div);
+}
+window.promptRename=i=>{ const f=S.files.find(x=>x.id===i); const v=prompt('Name this document',f.name); if(v&&v.trim()){ f.name=v.trim(); save(); V.files(); document.getElementById('vName').textContent=f.name } };
+window.tagFile=(i,t)=>{ const f=S.files.find(x=>x.id===i); f.tag=t; save(); sheetTagBar(f); V.files() };
+window.delFile=async i=>{ if(!confirm('Remove this file from the board?')) return; await Store.del('file:'+i); S.files=S.files.filter(f=>f.id!==i); await save(); V.files(); closeViewer() };
+function applyZoom(){ const im=document.getElementById('vImg'); if(!im) return; im.style.width=(100*vZoom)+'%'; im.classList.toggle('hc',vHC) }
+function closeViewer(){ document.getElementById('viewer').classList.remove('on'); document.getElementById('vStage').innerHTML='' }
+document.getElementById('vClose').onclick=closeViewer;
+document.getElementById('vIn').onclick=()=>{ vZoom=Math.min(vZoom*1.35,6); applyZoom() };
+document.getElementById('vOut').onclick=()=>{ vZoom=Math.max(vZoom/1.35,1); applyZoom() };
+document.getElementById('vFit').onclick=()=>{ vZoom=1; applyZoom() };
+document.getElementById('vHC').onclick=()=>{ vHC=!vHC; applyZoom() };
+
+/* ---- PLAN ---- */
+V.plan = function(){
+  const p=S.profile, pos=cyclePos();
+  let map='';
+  if(p.c1){
+    const start=parseYmd(p.c1);
+    for(let c=1;c<=(p.cycles||6);c++){
+      const d0=addDays(start,(c-1)*(p.cycleLen||21));
+      const done = pos && !pos.before && pos.cycleRaw>c;
+      const now = pos && !pos.before && pos.cycleRaw===c;
+      const fill = now ? (pos.day/(p.cycleLen||21))*100 : (done?100:0);
+      map += `<div class="cyclerow ${done?'done':''}"><div class="lbl">Cycle ${c}</div>
+        <div class="bar"><em style="width:${fill}%"></em><i></i></div>
+        <div class="dt">${esc(prettyShort(d0))}</div></div>`;
+    }
+  }
+  const appts = S.appts.slice().sort((a,b)=>a.date.localeCompare(b.date)).map(a=>`
+    <div class="item"><div class="body"><p><b>${esc(a.what)}</b></p>
+      <div class="meta">${esc(pretty(a.date))}${a.time?' · '+esc(a.time):''}${a.where?' · '+esc(a.where):''}${a.notes?'<br>'+esc(a.notes):''}</div></div>
+      <button class="x noprint" onclick="delAppt('${a.id}')">×</button></div>`).join('')
+    || `<div class="empty"><b>No appointments yet</b>Infusions, scans, the heart scan, surgery consults.</div>`;
+
+  const contacts = S.contacts.map(c=>`
+    <div class="item"><div class="body"><p><b>${esc(c.name)}</b></p>
+      <div class="meta">${c.role?esc(c.role)+' · ':''}${c.phone?`<a href="tel:${esc(c.phone.replace(/[^0-9+]/g,''))}">${esc(c.phone)}</a>`:'<em>no number saved</em>'}</div></div>
+      <button class="btn sm quiet noprint" onclick="editContact('${c.id}')">Edit</button></div>`).join('');
+
+  h('v-plan', `
+    <div class="sectionhead"><h2>The plan</h2></div>
+    <div class="card">
+      <div class="eyebrow">Treatment</div>
+      <p style="margin:4px 0 10px">${esc(p.regimen)}</p>
+      ${p.c1?`<div class="sub" style="margin-bottom:12px">First infusion ${esc(pretty(p.c1))} · every ${p.cycleLen} days · ${p.cycles} cycles planned</div><div class="cyclemap">${map}</div>`:''}
+      <button class="btn ghost noprint" style="margin-top:14px" onclick="openSetup()">Edit the plan</button>
+    </div>
+
+    <div class="sectionhead"><h2>Phone numbers</h2></div>
+    <div class="card">${contacts}
+      <button class="btn ghost sm noprint" style="margin-top:12px" onclick="editContact()">Add a number</button></div>
+
+    <div class="sectionhead"><h2>Appointments</h2></div>
+    <div class="card">${appts}
+      <button class="btn ghost sm noprint" style="margin-top:12px" onclick="openAppt()">Add an appointment</button></div>
+
+    <div class="sectionhead"><h2>Medicines</h2></div>
+    <div class="card">
+      ${medsEditor()}
+      <button class="btn ghost sm noprint" style="margin-top:12px" onclick="openMed()">Add a medicine</button>
+    </div>
+
+    <div class="sectionhead"><h2>What the team said</h2></div>
+    <div class="card">
+      <p class="sub" style="margin-bottom:12px">A place to type what the dietitian, the nurse, or the physical therapist actually said — so it isn't guesswork later.</p>
+      <label class="field"><span>Eating and drinking</span><textarea id="gDiet" onchange="setG('diet',this.value)" placeholder="Notes from the dietitian, foods that went down easily, water goal the nurse suggested">${esc(S.guidance.diet)}</textarea></label>
+      <label class="field"><span>Moving around</span><textarea id="gMove" onchange="setG('movement',this.value)" placeholder="What the team cleared, and what actually felt doable">${esc(S.guidance.movement)}</textarea></label>
+      <label class="field"><span>Anything else</span><textarea id="gOther" onchange="setG('other',this.value)">${esc(S.guidance.other)}</textarea></label>
+    </div>
+
+    <div class="sectionhead"><h2>Keeping it safe</h2></div>
+    <div class="card noprint">
+      <p class="sub" style="margin-bottom:12px">Everything lives on this device only. There is no automatic sync — a backup file is only current the moment you save it, so save one after any real update.</p>
+      ${backupStatus()}
+      <div class="row" style="margin-top:10px">
+        <button class="btn ghost" onclick="exportAll()">Save a backup file</button>
+        <button class="btn ghost" onclick="document.getElementById('impIn').click()">Restore a backup</button>
+      </div>
+      <input type="file" id="impIn" accept="application/json" style="display:none" onchange="importAll(event)">
+      <button class="btn danger" style="margin-top:10px" onclick="wipe()">Erase everything</button>
+    </div>`);
+};
+
+function medsEditor(){
+  const M = S.meds;
+  const row = (m,where,idx)=>`<div class="item"><div class="body"><p><b>${esc(m.n)}</b>${m.flag?' <span class="tag" style="color:var(--caution);background:var(--caution-soft)">Ask</span>':''}</p>
+    <div class="meta">${esc(m.d)}${m.note?'<br>'+esc(m.note):''}</div></div>
+    <button class="btn sm quiet noprint" onclick="editMed('${where}',${idx})">Edit</button>
+    <button class="x noprint" onclick="delMed('${where}',${idx})">×</button></div>`;
+  const daily = M.daily.map((m,i)=>row(m,'daily',i)).join('');
+  const byDay = Object.keys(M.byDay).sort((a,b)=>a-b).map(d=>
+    M.byDay[d].map((m,i)=>`<div class="item"><div class="body"><p><b>${esc(m.n)}</b> <span class="meta">— day ${esc(d)}</span></p>
+      <div class="meta">${esc(m.d)}${m.note?'<br>'+esc(m.note):''}</div></div>
+      <button class="btn sm quiet noprint" onclick="editMed('day:${d}',${i})">Edit</button>
+      <button class="x noprint" onclick="delMed('day:${d}',${i})">×</button></div>`).join('')
+  ).join('');
+  const prn = M.prn.map((m,i)=>row(m,'prn',i)).join('');
+  const any = M.daily.length||M.prn.length||Object.keys(M.byDay).length;
+  if(!any) return `<div class="empty"><b>No medicines listed yet</b>Add anything taken daily, on a specific cycle day, or as needed.</div>`;
+  return (M.daily.length?`<div class="eyebrow">Every day</div>${daily}`:'')
+    + (byDay?`<div class="hr"></div><div class="eyebrow">On specific cycle days</div>${byDay}`:'')
+    + (M.prn.length?`<div class="hr"></div><div class="eyebrow">As needed</div>${prn}`:'');
+}
+
+window.openMed = (where,idx)=>{
+  const editing = where!==undefined;
+  let m = {n:'',d:'',note:'',flag:false}, day='';
+  if(editing){
+    if(where==='daily') m = {...S.meds.daily[idx]};
+    else if(where==='prn') m = {...S.meds.prn[idx]};
+    else { day = where.split(':')[1]; m = {...S.meds.byDay[day][idx]}; }
+  }
+  sheet(`<h2>${editing?'Edit':'Add'} a medicine</h2>
+    <label class="field"><span>Name</span><input type="text" id="mName" value="${esc(m.n)}" placeholder="e.g. Anti-nausea tablet, 10 mg"></label>
+    <label class="field"><span>How and when</span><input type="text" id="mDose" value="${esc(m.d)}" placeholder="e.g. Every 6 hours as needed for nausea"></label>
+    <label class="field"><span>When it applies</span>
+      <select id="mWhen">
+        <option value="daily" ${(!editing||where==='daily')?'selected':''}>Every day</option>
+        <option value="day" ${editing&&where&&where.startsWith('day:')?'selected':''}>A specific cycle day</option>
+        <option value="prn" ${editing&&where==='prn'?'selected':''}>As needed</option>
+      </select></label>
+    <label class="field" id="mDayWrap" style="display:${editing&&where&&where.startsWith('day:')?'block':'none'}"><span>Cycle day</span><input type="number" id="mDay" min="1" value="${esc(day)}" placeholder="e.g. 2"></label>
+    <label class="field"><span>Note (optional)</span><input type="text" id="mNote" value="${esc(m.note||'')}"></label>
+    <label style="display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:.88rem"><input type="checkbox" id="mFlag" ${m.flag?'checked':''} style="width:auto"> Flag this one for a question at the next visit</label>
+    <div class="row">
+      <button class="btn" onclick="saveMed(${editing?`'${where}',${idx}`:'undefined,undefined'})">Save</button>
+      ${editing?`<button class="btn danger" onclick="delMed('${where}',${idx});closeSheet()">Remove</button>`:''}
+    </div>`);
+  document.getElementById('mWhen').onchange = e=>{ document.getElementById('mDayWrap').style.display = e.target.value==='day'?'block':'none' };
+};
+window.saveMed = (where,idx)=>{
+  const n=document.getElementById('mName').value.trim();
+  const d=document.getElementById('mDose').value.trim();
+  const note=document.getElementById('mNote').value.trim();
+  const flag=document.getElementById('mFlag').checked;
+  const when=document.getElementById('mWhen').value;
+  if(!n){ closeSheet(); return }
+  const entry = {n,d,note,flag};
+  if(where!==undefined) delMed(where,idx,true);
+  if(when==='daily') S.meds.daily.push(entry);
+  else if(when==='prn') S.meds.prn.push(entry);
+  else{
+    const day=document.getElementById('mDay').value.trim();
+    if(day){ S.meds.byDay[day]=S.meds.byDay[day]||[]; S.meds.byDay[day].push(entry) }
+  }
+  save(); V.plan(); V.today(); closeSheet();
+};
+window.editMed = (where,idx)=>openMed(where,idx);
+window.delMed = (where,idx,silent)=>{
+  if(where==='daily') S.meds.daily.splice(idx,1);
+  else if(where==='prn') S.meds.prn.splice(idx,1);
+  else{ const day=where.split(':')[1]; S.meds.byDay[day].splice(idx,1); if(!S.meds.byDay[day].length) delete S.meds.byDay[day]; }
+  if(!silent){ save(); V.plan(); V.today() }
+};
+
+function backupStatus(){
+  const meta = S.meta||{lastChange:0,lastExport:0};
+  if(!meta.lastExport){
+    return `<div class="notice">No backup saved yet from this device.</div>`;
+  }
+  const stale = meta.lastChange > meta.lastExport;
+  const when = new Date(meta.lastExport).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
+  return stale
+    ? `<div class="notice" style="color:var(--alarm);background:var(--alarm-soft)">Changes since the last backup (${when}). Save a fresh one before sending it anywhere.</div>`
+    : `<div class="notice" style="color:var(--mark);background:var(--mark-soft)">Backup is current, saved ${when}.</div>`;
+}
+
+window.setG=(k,v)=>{ S.guidance[k]=v; save() };
+window.openSetup = ()=>{ const p=S.profile;
+  sheet(`<h2>The plan</h2>
+  <label class="field"><span>Name (optional)</span><input type="text" id="pName" value="${esc(p.name)}" placeholder="Whose board is this?"></label>
+  <label class="field"><span>Treatment</span><input type="text" id="pReg" value="${esc(p.regimen)}"></label>
+  <label class="field"><span>First infusion date</span><input type="date" id="pC1" value="${esc(p.c1)}"></label>
+  <div class="row"><label class="field" style="flex:1"><span>Days per cycle</span><input type="number" id="pLen" value="${p.cycleLen}"></label>
+  <label class="field" style="flex:1"><span>Cycles planned</span><input type="number" id="pCyc" value="${p.cycles}"></label></div>
+  <button class="btn" onclick="saveSetup()">Save</button>`) };
+window.saveSetup = ()=>{
+  S.profile.name=document.getElementById('pName').value.trim();
+  S.profile.regimen=document.getElementById('pReg').value.trim();
+  S.profile.c1=document.getElementById('pC1').value;
+  S.profile.cycleLen=Math.max(1,parseInt(document.getElementById('pLen').value)||21);
+  S.profile.cycles=Math.max(1,parseInt(document.getElementById('pCyc').value)||6);
+  S.prefs.setup=true; save(); render(); closeSheet();
+};
+window.openAppt = ()=> sheet(`<h2>Add an appointment</h2>
+  <label class="field"><span>What is it</span><input type="text" id="aWhat" placeholder="Infusion — cycle 2"></label>
+  <label class="field"><span>Date</span><input type="date" id="aDate" value="${today()}"></label>
+  <label class="field"><span>Time</span><input type="time" id="aTime"></label>
+  <label class="field"><span>Where</span><input type="text" id="aWhere" placeholder="Infusion center, 3rd floor"></label>
+  <label class="field"><span>Notes</span><textarea id="aNotes" placeholder="Arrive 30 min early for labs. Take the steroid the night before."></textarea></label>
+  <button class="btn" onclick="addAppt()">Save</button>`);
+window.addAppt = ()=>{ const w=document.getElementById('aWhat').value.trim(); if(!w) return closeSheet();
+  S.appts.push({id:id(),what:w,date:document.getElementById('aDate').value,time:document.getElementById('aTime').value,where:document.getElementById('aWhere').value.trim(),notes:document.getElementById('aNotes').value.trim()});
+  save(); V.plan(); V.today(); closeSheet() };
+window.delAppt = i=>{ S.appts=S.appts.filter(a=>a.id!==i); save(); V.plan(); V.today() };
+window.editContact = i=>{ const c = i? S.contacts.find(x=>x.id===i) : {id:'',name:'',role:'',phone:''};
+  sheet(`<h2>${i?'Edit':'Add'} a number</h2>
+  <label class="field"><span>Who</span><input type="text" id="cName" value="${esc(c.name)}"></label>
+  <label class="field"><span>When to use it</span><input type="text" id="cRole" value="${esc(c.role)}" placeholder="Nights and weekends"></label>
+  <label class="field"><span>Phone</span><input type="tel" id="cPhone" value="${esc(c.phone)}"></label>
+  <div class="row"><button class="btn" onclick="saveContact('${i||''}')">Save</button>
+  ${i?`<button class="btn danger" onclick="delContact('${i}')">Remove</button>`:''}</div>`) };
+window.saveContact = i=>{ const n=document.getElementById('cName').value.trim(), r=document.getElementById('cRole').value.trim(), p=document.getElementById('cPhone').value.trim();
+  if(i){ const c=S.contacts.find(x=>x.id===i); c.name=n; c.role=r; c.phone=p } else if(n){ S.contacts.push({id:id(),name:n,role:r,phone:p}) }
+  save(); V.plan(); closeSheet() };
+window.delContact = i=>{ S.contacts=S.contacts.filter(x=>x.id!==i); save(); V.plan(); closeSheet() };
+
+/* ---- call sheet ---- */
+window.openCall = ()=>{
+  const nums = S.contacts.filter(c=>c.phone).map(c=>`
+    <a class="calllink" href="tel:${esc(c.phone.replace(/[^0-9+]/g,''))}"><span><b>${esc(c.name)}</b><span>${esc(c.role||c.phone)}</span></span><span class="go">Call</span></a>`).join('')
+    || `<p class="sub">No numbers saved yet. Add them under Plan so they are one tap away at 3am.</p>`;
+  sheet(`<h2 style="color:var(--alarm)">Call right away if</h2>
+    <ul class="alarmlist">
+      <li><b>Temperature 100.4°F (38°C) or higher</b>, or shaking chills — even if everything else feels fine</li>
+      <li>Trouble breathing, chest pain, or a racing heart</li>
+      <li>Vomiting or diarrhea that won't let up, or not being able to keep fluids down</li>
+      <li>Redness, swelling, drainage, or new pain at the port</li>
+      <li>Bleeding that won't stop, or new heavy bruising</li>
+      <li>Confusion, fainting, or a fall</li>
+      <li>Sudden swelling or pain in one leg, or a severe new headache</li>
+    </ul>
+    <p class="sub" style="margin-bottom:16px">Many teams also ask that Tylenol <b>not</b> be taken before calling, since it can hide a fever — worth confirming what this team says. Don't wait for morning, and don't worry about bothering them. This is exactly what the line is for.</p>
+    ${nums}
+    <p class="sub" style="margin-top:14px">If nobody can be reached and something feels serious, that's an emergency room trip — tell them the patient is on chemotherapy.</p>`);
+};
+
+/* ---- backup ---- */
+window.exportAll = async ()=>{
+  const out = {state:S, files:{}};
+  for(const f of S.files){ out.files[f.id] = await Store.get('file:'+f.id) }
+  const blob = new Blob([JSON.stringify(out)], {type:'application/json'});
+  const mb = blob.size/1048576;
+  if(mb>25 && !confirm('This backup is '+mb.toFixed(0)+' MB. Files that big can be slow or fail to load back in on a phone. Remove any duplicate documents and try again, or continue anyway?')) return;
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='care-board-backup-'+today()+'.json'; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+  S.meta.lastExport = Date.now(); await save(); V.plan();
+};
+window.importAll = e=>{
+  const f=e.target.files[0]; if(!f) return; e.target.value='';
+  const r=new FileReader();
+  r.onload=async()=>{ try{
+    const d=JSON.parse(r.result);
+    if(!d.state) throw 0;
+    S=d.state;
+    S.guidance=S.guidance||{diet:'',movement:'',other:''}; S.meds=S.meds||EMPTY_MEDS; S.docPlan=S.docPlan||[]; S.meta=S.meta||{lastChange:Date.now(),lastExport:0}; S.meta.lastExport=Date.now();
+    for(const k in (d.files||{})){ if(d.files[k]) await Store.set('file:'+k, d.files[k]) }
+    await save(); render(); alert('Restored.');
+  }catch(err){ alert("That file couldn't be read as a backup.") } };
+  r.readAsText(f);
+};
+window.wipe = async ()=>{
+  if(!confirm('This erases everything on this device, including the saved papers. Sure?')) return;
+  for(const f of S.files) await Store.del('file:'+f.id);
+  S=blank(); S.questions=SEED_Q.map(t=>({id:id(),text:t,asked:false,answer:''}));
+  await save(); render();
+};
+
+/* ---- print ---- */
+window.printSheet = ()=>{
+  const open=S.questions.filter(q=>!q.asked);
+  const logs=S.logs.slice().sort((a,b)=>b.date.localeCompare(a.date)).slice(0,21);
+  const w=window.open('','_blank'); if(!w) return alert('Allow pop-ups to print this.');
+  w.document.write(`<html><head><title>Summary</title><style>
+    body{font:13pt Georgia,serif;margin:28px;color:#111}
+    h1{font-size:17pt;margin:0 0 2px} h2{font-size:12pt;margin:22px 0 6px;border-bottom:1px solid #999;padding-bottom:3px}
+    ul{margin:0;padding-left:20px} li{margin-bottom:5px}
+    table{border-collapse:collapse;width:100%;font-size:10.5pt} td,th{border-bottom:1px solid #ddd;padding:5px 4px;text-align:left;vertical-align:top}
+    </style></head><body>
+    <h1>${esc(S.profile.name||'Patient')} — visit summary</h1>
+    <div>${esc(new Date().toLocaleDateString())} · ${esc(S.profile.regimen)}</div>
+    <h2>Questions</h2>${open.length?'<ul>'+open.map(q=>'<li>'+esc(q.text)+'</li>').join('')+'</ul>':'<p>None.</p>'}
+    <h2>Symptom log — last 3 weeks</h2>
+    <table><tr><th>Date</th><th>Temp</th><th>Reported</th><th>Notes</th></tr>
+    ${logs.map(l=>{
+      const s=SX.filter(x=>(l.sx&&l.sx[x.k])>0).map(x=>esc(x.n)+' ('+LEVELS[l.sx[x.k]].toLowerCase()+')').join(', ');
+      return `<tr><td>${esc(pretty(l.date))}</td><td>${esc(l.temp||'')}</td><td>${s||'—'}</td><td>${esc(l.note||'')}</td></tr>`;
+    }).join('')}</table></body></html>`);
+  w.document.close(); w.focus(); setTimeout(()=>w.print(),350);
+};
+
+/* ---- shell ---- */
+function sheet(html){ document.getElementById('sheetBody').innerHTML=html; document.getElementById('scrim').classList.add('on') }
+function closeSheet(){ document.getElementById('scrim').classList.remove('on') }
+window.closeSheet=closeSheet;
+document.getElementById('scrim').onclick=e=>{ if(e.target.id==='scrim') closeSheet() };
+document.getElementById('callBtn').onclick=()=>openCall();
+document.getElementById('themeBtn').onclick=()=>{ S.prefs.theme = S.prefs.theme==='dark'?'light':'dark'; save(); render() };
+document.getElementById('sizeBtn').onclick=()=>{ S.prefs.scale = S.prefs.scale>=3?1:S.prefs.scale+1; save(); render() };
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeSheet(); closeViewer() } });
+
+window.go = t=>{
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  document.getElementById('v-'+t).classList.add('on');
+  document.querySelectorAll('.tabbar button').forEach(b=>b.setAttribute('aria-current', String(b.dataset.tab===t)));
+  window.scrollTo(0,0);
+};
+document.querySelectorAll('.tabbar button').forEach(b=>b.onclick=()=>go(b.dataset.tab));
+
+/* ---- offline (only works when served from a web address, not a local file) ---- */
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){
+  window.addEventListener('load',()=>{ navigator.serviceWorker.register('sw.js').catch(()=>{}) });
+}
+
+/* ---- boot ---- */
+(async function(){
+  await Store.open();
+  if(!Store.ok) document.getElementById('storeWarn').style.display='block';
+  const saved = await Store.get('state');
+  if(saved){ S = saved; S.guidance = S.guidance||{diet:'',movement:'',other:''}; S.meds = S.meds||EMPTY_MEDS; S.docPlan = S.docPlan||[]; S.meta = S.meta||{lastChange:Date.now(),lastExport:0} }
+  else{
+    S = blank();
+    S.questions = SEED_Q.map(t=>({id:id(),text:t,asked:false,answer:''}));
+    await save();
+  }
+  render();
+  if(!S.profile.c1) setTimeout(()=>openSetup(),400);
+})();
+</script>
+</body>
+</html>
