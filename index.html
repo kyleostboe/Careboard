@@ -633,14 +633,6 @@ V.files = function(){
         <button style="color:var(--mark)" onclick="openFile('${f.id}')">Open</button></div>
     </div>`).join('');
 
-  const plan = (S.docPlan||[]);
-  const planLeft = plan.filter(x=>!x.have).length;
-  const planHtml = plan.map((x,i)=>`
-    <div class="plan ${x.have?'done':''}">
-      <button class="box ${x.have?'on':''}" onclick="togglePlan(${i})" aria-label="Got it">${x.have?'✓':''}</button>
-      <span>${esc(x.label)}</span><span class="t">${esc(x.tag)}</span>
-    </div>`).join('');
-
   h('v-files', `
     <div class="sectionhead"><h2>Papers</h2><span class="count">${S.files.length} saved</span></div>
     <input type="file" id="fileIn" multiple accept="image/*,application/pdf" style="display:none">
@@ -655,11 +647,6 @@ V.files = function(){
       <h2>Needs filing</h2>
       <p class="sub" style="margin:4px 0 12px">${queue.length} item${queue.length===1?'':'s'} still unsorted. Name each one and tap where it belongs.</p>
       ${qHtml}</div>`:''}
-
-    ${plan.length?`<div class="card noprint">
-      <h2>Collection checklist</h2>
-      <p class="sub" style="margin:4px 0 10px">${planLeft?planLeft+' still to gather from the portal.':'Everything on the list is in.'}</p>
-      ${planHtml}</div>`:''}
 
     <div class="tagrow noprint">${['All'].concat(TAGS).map(t=>`<button aria-pressed="${fileFilter===t}" onclick="setFilter('${t}')">${t}</button>`).join('')}</div>
     ${list.length?`<div class="filegrid">${tiles}</div>`
