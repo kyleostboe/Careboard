@@ -1,5 +1,7 @@
 # Care Board
 
+https://kyleostboe.github.io/Careboard/
+
 A single-file web app for keeping track of chemotherapy 
 
 ## What it does
