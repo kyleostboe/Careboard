@@ -268,7 +268,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-vis
   <!-- PLAN -->
   <section class="view" id="v-plan"></section>
 
-  <div class="foot noprint">Everything stays on this device. Nothing is uploaded anywhere.<br>Not medical advice — the care team's instructions always come first.<br><span style="opacity:.55">build 2026-08-24a</span></div>
+  <div class="foot noprint">Everything stays on this device. Nothing is uploaded anywhere.<br>Not medical advice — the care team's instructions always come first.<br><span style="opacity:.55">build 2026-08-25a</span></div>
 </main>
 
 <nav class="tabbar">
@@ -731,13 +731,19 @@ function b64ToBytes(dataUrl){
 /* Renders the current PDF page onto a canvas at the current zoom, in place.
    This is what makes it work identically on every browser — nothing here
    depends on the phone having its own PDF support. */
+let vRenderSeq = 0;
 async function renderPdfPage(){
   if(!vPdfDoc) return;
+  const seq = ++vRenderSeq;
   const stage=document.getElementById('vStage');
   const page = await vPdfDoc.getPage(vPdfPage);
   const dpr = window.devicePixelRatio || 1;
   const base = page.getViewport({scale:1});
-  const fit = Math.max((stage.clientWidth-24)/base.width, 0.1);
+  /* Measure the stage, but never trust a zero. Zero means we were measured while
+     the viewer was still display:none, and the 0.1 floor below would turn that
+     into a postage-stamp page. Fall back to the window width instead. */
+  const avail = (stage.clientWidth || document.documentElement.clientWidth || 320) - 24;
+  const fit = Math.max(avail/base.width, 0.1);
   const viewport = page.getViewport({scale: fit * vZoom * dpr});
   const canvas = document.createElement('canvas');
   canvas.width = viewport.width; canvas.height = viewport.height;
@@ -745,6 +751,7 @@ async function renderPdfPage(){
   canvas.style.height = (viewport.height/dpr)+'px';
   if(vHC) canvas.classList.add('hc');
   await page.render({canvasContext: canvas.getContext('2d'), viewport}).promise;
+  if(seq !== vRenderSeq) return;  // a newer render started while we were drawing
   stage.innerHTML=''; stage.appendChild(canvas);
   const lbl=document.getElementById('vPdfLabel'); if(lbl) lbl.textContent = vPdfPage+' / '+vPdfPages;
 }
@@ -763,14 +770,19 @@ window.openFile = async fid=>{
   const meta=S.files.find(f=>f.id===fid); if(!meta) return;
   vCur=meta; vZoom=1; vHC=false; vMode='image'; vPdfDoc=null; vPdfPage=1; vPdfPages=1;
   removePdfNav();
-  const data = await Store.get('file:'+fid);
   const stage=document.getElementById('vStage');
   document.getElementById('vName').textContent=meta.name;
+  stage.innerHTML='<div class="empty" style="padding:40px">Opening…</div>';
+  /* Show the viewer BEFORE anything renders. renderPdfPage() sizes the page from
+     stage.clientWidth, which reads 0 while .viewer is still display:none — that is
+     what made the first page come out tiny until you touched Fit / + / −. */
+  document.getElementById('viewer').classList.add('on');
+  sheetTagBar(meta);
+  const data = await Store.get('file:'+fid);
   if(!data){
     stage.innerHTML='<div class="empty" style="padding:40px">This file could not be opened. It may have been cleared by the browser.</div>';
   } else if(meta.mime==='application/pdf'){
     vMode='pdf';
-    stage.innerHTML = '<div class="empty" style="padding:40px">Opening…</div>';
     try{
       if(typeof pdfjsLib === 'undefined') throw new Error('pdfjs missing');
       const doc = await pdfjsLib.getDocument({data: b64ToBytes(data)}).promise;
@@ -783,8 +795,6 @@ window.openFile = async fid=>{
   } else {
     stage.innerHTML=`<img id="vImg" src="${data}" alt="${esc(meta.name)}" style="width:100%">`;
   }
-  document.getElementById('viewer').classList.add('on');
-  sheetTagBar(meta);
 };
 function sheetTagBar(meta){
   const bar=document.querySelector('#viewer .vbar');
@@ -814,6 +824,13 @@ document.getElementById('vClose').onclick=closeViewer;
 document.getElementById('vIn').onclick=()=>{ vZoom=Math.min(vZoom*1.35,6); applyZoom() };
 document.getElementById('vOut').onclick=()=>{ vZoom=Math.max(vZoom/1.35,1); applyZoom() };
 document.getElementById('vFit').onclick=()=>{ vZoom=1; applyZoom() };
+/* Rotating the phone changes the stage width, so re-fit the page the same way
+   Fit would. Debounced because resize fires in a burst during a rotate. */
+let vResizeT=null;
+window.addEventListener('resize',()=>{
+  if(vMode!=='pdf' || !vPdfDoc) return;
+  clearTimeout(vResizeT); vResizeT=setTimeout(renderPdfPage,150);
+});
 document.getElementById('vHC').onclick=()=>{ vHC=!vHC; applyZoom() };
 
 /* ---- PLAN ---- */
