@@ -208,6 +208,11 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-vis
 .item .body{flex:1;min-width:0}
 .item .body p{margin:0}
 .item .meta{font-size:.75rem;color:var(--muted);margin-top:3px}
+/* Without this, links fall back to the browser default blue (#0000EE), which
+   measures 1.81:1 on the dark card — the saved phone numbers were invisible. */
+a{color:var(--mark)}
+.item .meta a{color:var(--mark);font-weight:650;text-decoration:none;border-bottom:1px solid var(--line)}
+.item .meta a:active{opacity:.7}
 .item .x{background:none;border:0;color:var(--muted);font-size:1.1rem;cursor:pointer;padding:2px 4px;line-height:1}
 .check{width:26px;height:26px;flex:none;border-radius:7px;border:1.8px solid var(--line);background:var(--card);cursor:pointer;display:flex;align-items:center;justify-content:center;margin-top:1px}
 .check.on{background:var(--mark);border-color:var(--mark);color:var(--on-mark);font-size:.85rem;font-weight:700}
@@ -321,7 +326,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-vis
   <!-- PLAN -->
   <section class="view" id="v-plan"></section>
 
-  <div class="foot noprint">Everything stays on this device. Nothing is uploaded anywhere.<br>Not medical advice — the care team's instructions always come first.<br><span style="opacity:.55">build 2026-08-25g</span></div>
+  <div class="foot noprint">Everything stays on this device. Nothing is uploaded anywhere.<br>Not medical advice — the care team's instructions always come first.<br><span style="opacity:.55">build 2026-08-25h</span></div>
 </main>
 
 <nav class="tabbar">
@@ -909,7 +914,7 @@ V.plan = function(){
   const appts = S.appts.slice().sort((a,b)=>a.date.localeCompare(b.date)).map(a=>`
     <div class="item"><div class="body"><p><b>${esc(a.what)}</b></p>
       <div class="meta">${esc(pretty(a.date))}${a.time?' · '+esc(a.time):''}${a.where?' · '+esc(a.where):''}${a.notes?'<br>'+esc(a.notes):''}</div></div>
-      <button class="x noprint" onclick="delAppt('${a.id}')">×</button></div>`).join('')
+      <button class="btn sm quiet noprint" onclick="openAppt('${a.id}')">Edit</button></div>`).join('')
     || `<div class="empty"><b>No appointments yet</b>Infusions, scans, the heart scan, surgery consults.</div>`;
 
   const contacts = S.contacts.map(c=>`
@@ -1078,17 +1083,24 @@ window.saveSetup = ()=>{
   S.profile.cycles=Math.max(1,parseInt(document.getElementById('pCyc').value)||6);
   S.prefs.setup=true; save(); render(); closeSheet();
 };
-window.openAppt = ()=> sheet(`<h2>Add an appointment</h2>
-  <label class="field"><span>What is it</span><input type="text" id="aWhat" placeholder="Infusion — cycle 2"></label>
-  <label class="field"><span>Date</span><input type="date" id="aDate" value="${today()}"></label>
-  <label class="field"><span>Time</span><input type="time" id="aTime"></label>
-  <label class="field"><span>Where</span><input type="text" id="aWhere" placeholder="Infusion center, 3rd floor"></label>
-  <label class="field"><span>Notes</span><textarea id="aNotes" placeholder="Arrive 30 min early for labs. Take the steroid the night before."></textarea></label>
-  <button class="btn" onclick="addAppt()">Save</button>`);
-window.addAppt = ()=>{ const w=document.getElementById('aWhat').value.trim(); if(!w) return closeSheet();
-  S.appts.push({id:id(),what:w,date:document.getElementById('aDate').value,time:document.getElementById('aTime').value,where:document.getElementById('aWhere').value.trim(),notes:document.getElementById('aNotes').value.trim()});
+/* Add and edit share one sheet, the same way contacts do — passing an id
+   prefills it and turns Save into an update instead of a new row. */
+window.openAppt = i=>{ const a = i? S.appts.find(x=>x.id===i) : {id:'',what:'',date:today(),time:'',where:'',notes:''};
+  if(!a) return;
+  sheet(`<h2>${i?'Edit':'Add'} an appointment</h2>
+  <label class="field"><span>What is it</span><input type="text" id="aWhat" value="${esc(a.what)}" placeholder="Infusion — cycle 2"></label>
+  <label class="field"><span>Date</span><input type="date" id="aDate" value="${esc(a.date)}"></label>
+  <label class="field"><span>Time</span><input type="time" id="aTime" value="${esc(a.time)}"></label>
+  <label class="field"><span>Where</span><input type="text" id="aWhere" value="${esc(a.where)}" placeholder="Infusion center, 3rd floor"></label>
+  <label class="field"><span>Notes</span><textarea id="aNotes" placeholder="Arrive 30 min early for labs. Take the steroid the night before.">${esc(a.notes)}</textarea></label>
+  <div class="row"><button class="btn" onclick="saveAppt('${i||''}')">Save</button>
+  ${i?`<button class="btn danger" onclick="delAppt('${i}')">Remove</button>`:''}</div>`) };
+window.saveAppt = i=>{ const w=document.getElementById('aWhat').value.trim();
+  const f={what:w,date:document.getElementById('aDate').value,time:document.getElementById('aTime').value,
+           where:document.getElementById('aWhere').value.trim(),notes:document.getElementById('aNotes').value.trim()};
+  if(i){ const a=S.appts.find(x=>x.id===i); if(a) Object.assign(a,f) } else if(w){ S.appts.push({id:id(),...f}) }
   save(); V.plan(); V.today(); closeSheet() };
-window.delAppt = i=>{ S.appts=S.appts.filter(a=>a.id!==i); save(); V.plan(); V.today() };
+window.delAppt = i=>{ S.appts=S.appts.filter(a=>a.id!==i); save(); V.plan(); V.today(); closeSheet() };
 window.editContact = i=>{ const c = i? S.contacts.find(x=>x.id===i) : {id:'',name:'',role:'',phone:''};
   sheet(`<h2>${i?'Edit':'Add'} a number</h2>
   <label class="field"><span>Who</span><input type="text" id="cName" value="${esc(c.name)}"></label>
