@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- Keeps medical data on this device. connect-src 'self' means the browser itself
+     refuses to send anything to another server, even if a future bug or a bad
+     paste tried to; form-action 'none' blocks posting it anywhere. Everything the
+     app needs is served from this origin, so nothing here has to be relaxed. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; worker-src 'self' blob:; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F7F6F3">
 <title>Care Board</title>
@@ -268,7 +274,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-vis
   <!-- PLAN -->
   <section class="view" id="v-plan"></section>
 
-  <div class="foot noprint">Everything stays on this device. Nothing is uploaded anywhere.<br>Not medical advice — the care team's instructions always come first.<br><span style="opacity:.55">build 2026-08-25b</span></div>
+  <div class="foot noprint">Everything stays on this device. Nothing is uploaded anywhere.<br>Not medical advice — the care team's instructions always come first.<br><span style="opacity:.55">build 2026-08-25c</span></div>
 </main>
 
 <nav class="tabbar">
