@@ -213,7 +213,13 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-vis
 a{color:var(--mark)}
 .item .meta a{color:var(--mark);font-weight:650;text-decoration:none;border-bottom:1px solid var(--line)}
 .item .meta a:active{opacity:.7}
-.item .x{background:none;border:0;color:var(--muted);font-size:1.1rem;cursor:pointer;padding:2px 4px;line-height:1}
+/* This used to be a ~20px hit area sitting right next to Edit, which is how
+   a medicine gets deleted by mistake. 44px is the minimum comfortable touch
+   target; the negative margin keeps the row height unchanged. */
+.item .x{background:none;border:0;color:var(--muted);font-size:1.1rem;cursor:pointer;line-height:1;
+  min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;
+  border-radius:12px;margin:-8px -10px -8px 0;flex:none}
+.item .x:active{background:var(--alarm-soft);color:var(--alarm)}
 .check{width:26px;height:26px;flex:none;border-radius:7px;border:1.8px solid var(--line);background:var(--card);cursor:pointer;display:flex;align-items:center;justify-content:center;margin-top:1px}
 .check.on{background:var(--mark);border-color:var(--mark);color:var(--on-mark);font-size:.85rem;font-weight:700}
 .done p{text-decoration:line-through;color:var(--muted)}
@@ -326,7 +332,7 @@ a{color:var(--mark)}
   <!-- PLAN -->
   <section class="view" id="v-plan"></section>
 
-  <div class="foot noprint">Everything stays on this device. Nothing is uploaded anywhere.<br>Not medical advice — the care team's instructions always come first.<br><span style="opacity:.55">build 2026-08-25h</span></div>
+  <div class="foot noprint">Everything stays on this device. Nothing is uploaded anywhere.<br>Not medical advice — the care team's instructions always come first.<br><span style="opacity:.55">build 2026-08-25i</span></div>
 </main>
 
 <nav class="tabbar">
@@ -479,6 +485,9 @@ const blank = ()=>({
 
 
 function id(){ return Math.random().toString(36).slice(2,10) }
+/* "1 documents" reads careless in a message asking someone to confirm losing
+   their data, and careless is the last tone that dialog should have. */
+function plural(n,one,many){ return n+' '+(n===1?one:many) }
 function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])) }
 async function save(){ if(S.meta) S.meta.lastChange = Date.now(); await Store.set('state', JSON.parse(JSON.stringify(S))) }
 
@@ -675,7 +684,9 @@ window.openQ = ()=> sheet(`<h2>Add a question</h2>
   <button class="btn" onclick="addQ()">Save it</button>`);
 window.addQ = ()=>{ const t=document.getElementById('qText').value.trim(); if(t){ S.questions.unshift({id:id(),text:t,asked:false,answer:''}); save(); V.ask(); V.today() } closeSheet() };
 window.toggleQ = i=>{ const q=S.questions.find(x=>x.id===i); q.asked=!q.asked; save(); V.ask(); V.today() };
-window.delQ = i=>{ S.questions=S.questions.filter(x=>x.id!==i); save(); V.ask(); V.today() };
+window.delQ = i=>{ const q=S.questions.find(x=>x.id===i);
+  if(!confirm('Remove this question?\n\n' + (q? q.text : '') + '\n\nThis cannot be undone.')) return;
+  S.questions=S.questions.filter(x=>x.id!==i); save(); V.ask(); V.today() };
 window.answerQ = i=>{ const q=S.questions.find(x=>x.id===i);
   sheet(`<h2>What did they say?</h2><p class="sub" style="margin-bottom:12px">${esc(q.text)}</p>
   <label class="field"><textarea id="aText">${esc(q.answer)}</textarea></label>
@@ -865,7 +876,8 @@ function sheetTagBar(meta){
 }
 window.promptRename=i=>{ const f=S.files.find(x=>x.id===i); const v=prompt('Name this document',f.name); if(v&&v.trim()){ f.name=v.trim(); save(); V.files(); document.getElementById('vName').textContent=f.name } };
 window.tagFile=(i,t)=>{ const f=S.files.find(x=>x.id===i); f.tag=t; save(); sheetTagBar(f); V.files() };
-window.delFile=async i=>{ if(!confirm('Remove this file from the board?')) return; await Store.del('file:'+i); S.files=S.files.filter(f=>f.id!==i); await save(); V.files(); closeViewer() };
+window.delFile=async i=>{ const f=S.files.find(x=>x.id===i);
+  if(!confirm('Remove this document?\n\n' + (f? f.name : '') + '\n\nIt is deleted from this device and cannot be undone.')) return; await Store.del('file:'+i); S.files=S.files.filter(f=>f.id!==i); await save(); V.files(); closeViewer() };
 function applyZoom(){
   if(vMode==='pdf'){ renderPdfPage(); return; }
   const im=document.getElementById('vImg'); if(!im) return;
@@ -1009,7 +1021,7 @@ window.openMed = (where,idx)=>{
     <label style="display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:.88rem"><input type="checkbox" id="mFlag" ${m.flag?'checked':''} style="width:auto"> Flag this one for a question at the next visit</label>
     <div class="row">
       <button class="btn" onclick="saveMed(${editing?`'${where}',${idx}`:'undefined,undefined'})">Save</button>
-      ${editing?`<button class="btn danger" onclick="delMed('${where}',${idx});closeSheet()">Remove</button>`:''}
+      ${editing?`<button class="btn danger" onclick="delMed('${where}',${idx})">Remove</button>`:''}
     </div>`);
   document.getElementById('mWhen').onchange = e=>{ document.getElementById('mDayWrap').style.display = e.target.value==='day'?'block':'none' };
 };
@@ -1032,10 +1044,17 @@ window.saveMed = (where,idx)=>{
 };
 window.editMed = (where,idx)=>openMed(where,idx);
 window.delMed = (where,idx,silent)=>{
+  /* silent is the internal call from saveMed relocating an entry — never prompt
+     there, or editing a medicine would ask to delete it mid-save. */
+  if(!silent){
+    const list = where==='daily'? S.meds.daily : where==='prn'? S.meds.prn : (S.meds.byDay[where.split(':')[1]]||[]);
+    const m = list[idx];
+    if(!confirm('Remove this medicine?\n\n' + (m&&m.n? m.n : '') + '\n\nThis cannot be undone.')) return;
+  }
   if(where==='daily') S.meds.daily.splice(idx,1);
   else if(where==='prn') S.meds.prn.splice(idx,1);
   else{ const day=where.split(':')[1]; S.meds.byDay[day].splice(idx,1); if(!S.meds.byDay[day].length) delete S.meds.byDay[day]; }
-  if(!silent){ save(); V.plan(); V.today() }
+  if(!silent){ save(); V.plan(); V.today(); closeSheet() }
 };
 
 function backupStatus(){
@@ -1098,9 +1117,13 @@ window.openAppt = i=>{ const a = i? S.appts.find(x=>x.id===i) : {id:'',what:'',d
 window.saveAppt = i=>{ const w=document.getElementById('aWhat').value.trim();
   const f={what:w,date:document.getElementById('aDate').value,time:document.getElementById('aTime').value,
            where:document.getElementById('aWhere').value.trim(),notes:document.getElementById('aNotes').value.trim()};
-  if(i){ const a=S.appts.find(x=>x.id===i); if(a) Object.assign(a,f) } else if(w){ S.appts.push({id:id(),...f}) }
+  /* An empty title means "don't save" rather than "blank out the one I had". */
+  if(!w){ closeSheet(); return }
+  if(i){ const a=S.appts.find(x=>x.id===i); if(a) Object.assign(a,f) } else { S.appts.push({id:id(),...f}) }
   save(); V.plan(); V.today(); closeSheet() };
-window.delAppt = i=>{ S.appts=S.appts.filter(a=>a.id!==i); save(); V.plan(); V.today(); closeSheet() };
+window.delAppt = i=>{ const a=S.appts.find(x=>x.id===i);
+  if(!confirm('Remove this appointment?\n\n' + (a? a.what + (a.date? ' — '+pretty(a.date) : '') : '') + '\n\nThis cannot be undone.')) return;
+  S.appts=S.appts.filter(x=>x.id!==i); save(); V.plan(); V.today(); closeSheet() };
 window.editContact = i=>{ const c = i? S.contacts.find(x=>x.id===i) : {id:'',name:'',role:'',phone:''};
   sheet(`<h2>${i?'Edit':'Add'} a number</h2>
   <label class="field"><span>Who</span><input type="text" id="cName" value="${esc(c.name)}"></label>
@@ -1109,9 +1132,12 @@ window.editContact = i=>{ const c = i? S.contacts.find(x=>x.id===i) : {id:'',nam
   <div class="row"><button class="btn" onclick="saveContact('${i||''}')">Save</button>
   ${i?`<button class="btn danger" onclick="delContact('${i}')">Remove</button>`:''}</div>`) };
 window.saveContact = i=>{ const n=document.getElementById('cName').value.trim(), r=document.getElementById('cRole').value.trim(), p=document.getElementById('cPhone').value.trim();
-  if(i){ const c=S.contacts.find(x=>x.id===i); c.name=n; c.role=r; c.phone=p } else if(n){ S.contacts.push({id:id(),name:n,role:r,phone:p}) }
+  if(!n){ closeSheet(); return }
+  if(i){ const c=S.contacts.find(x=>x.id===i); if(c){ c.name=n; c.role=r; c.phone=p } } else { S.contacts.push({id:id(),name:n,role:r,phone:p}) }
   save(); V.plan(); closeSheet() };
-window.delContact = i=>{ S.contacts=S.contacts.filter(x=>x.id!==i); save(); V.plan(); closeSheet() };
+window.delContact = i=>{ const c=S.contacts.find(x=>x.id===i);
+  if(!confirm('Remove this number?\n\n' + (c? c.name + (c.phone? ' — '+c.phone : '') : '') + '\n\nThis cannot be undone.')) return;
+  S.contacts=S.contacts.filter(x=>x.id!==i); save(); V.plan(); closeSheet() };
 
 /* ---- call sheet ---- */
 window.openCall = ()=>{
@@ -1151,6 +1177,14 @@ window.importAll = e=>{
   r.onload=async()=>{ try{
     const d=JSON.parse(r.result);
     if(!d.state) throw 0;
+    /* Restoring overwrites the whole board, so name what is about to go.
+       Parsed first on purpose: an unreadable file should never get this far. */
+    const c=S||{};
+    const n=(c.files||[]).length, lg=(c.logs||[]).length, q=(c.questions||[]).length, ap=(c.appts||[]).length;
+    if(!confirm('Restore this backup?\n\nEverything on this device is replaced by the contents of this file:\n'
+      + plural(n,'document','documents') + ', ' + plural(lg,'day logged','days logged') + ', '
+      + plural(q,'question','questions') + ', ' + plural(ap,'appointment','appointments') + '.\n\n'
+      + 'This cannot be undone. To keep what is here, cancel and use Save a backup file first.')) return;
     S=d.state;
     S.guidance=S.guidance||{diet:'',movement:'',other:''}; S.meds=S.meds||EMPTY_MEDS; S.docPlan=S.docPlan||[]; S.meta=S.meta||{lastChange:Date.now(),lastExport:0}; S.meta.lastExport=Date.now();
     for(const k in (d.files||{})){ if(d.files[k]) await Store.set('file:'+k, d.files[k]) }
@@ -1159,7 +1193,12 @@ window.importAll = e=>{
   r.readAsText(f);
 };
 window.wipe = async ()=>{
-  if(!confirm('This erases everything on this device, including the saved papers. Sure?')) return;
+  const c=S||{};
+  const n=(c.files||[]).length, lg=(c.logs||[]).length, q=(c.questions||[]).length;
+  if(!confirm('Erase everything on this device?\n\n'
+    + plural(n,'document','documents') + ', ' + plural(lg,'day logged','days logged') + ', '
+    + plural(q,'question','questions') + ', plus the plan, medicines and phone numbers.\n\n'
+    + 'This cannot be undone. To keep a copy, cancel and use Save a backup file first.')) return;
   for(const f of S.files) await Store.del('file:'+f.id);
   S=blank(); S.questions=SEED_Q.map(t=>({id:id(),text:t,asked:false,answer:''}));
   await save(); render();
