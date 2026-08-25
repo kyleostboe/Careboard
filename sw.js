@@ -1,6 +1,6 @@
 // Care Board offline cache.
 // Bump CACHE_VERSION any time you edit index.html, or phones will keep the old copy.
-const CACHE_VERSION = 'careboard-v12';
+const CACHE_VERSION = 'careboard-v13';
 
 self.addEventListener('install', e => {
   e.waitUntil(
