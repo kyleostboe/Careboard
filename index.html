@@ -268,7 +268,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-vis
   <!-- PLAN -->
   <section class="view" id="v-plan"></section>
 
-  <div class="foot noprint">Everything stays on this device. Nothing is uploaded anywhere.<br>Not medical advice — the care team's instructions always come first.<br><span style="opacity:.55">build 2026-08-25a</span></div>
+  <div class="foot noprint">Everything stays on this device. Nothing is uploaded anywhere.<br>Not medical advice — the care team's instructions always come first.<br><span style="opacity:.55">build 2026-08-25b</span></div>
 </main>
 
 <nav class="tabbar">
@@ -821,8 +821,12 @@ function closeViewer(){
   vMode='image';
 }
 document.getElementById('vClose').onclick=closeViewer;
-document.getElementById('vIn').onclick=()=>{ vZoom=Math.min(vZoom*1.35,6); applyZoom() };
-document.getElementById('vOut').onclick=()=>{ vZoom=Math.max(vZoom/1.35,1); applyZoom() };
+/* vZoom is a multiplier on fit-to-width, so vZoom 1 is the size a document opens
+   at. Flooring "−" at 1 therefore made it do nothing until you had zoomed in
+   first. ZOOM_MIN lets you pull back below fit to see a whole page at once. */
+const ZOOM_MIN = 0.5, ZOOM_MAX = 6;
+document.getElementById('vIn').onclick=()=>{ vZoom=Math.min(vZoom*1.35,ZOOM_MAX); applyZoom() };
+document.getElementById('vOut').onclick=()=>{ vZoom=Math.max(vZoom/1.35,ZOOM_MIN); applyZoom() };
 document.getElementById('vFit').onclick=()=>{ vZoom=1; applyZoom() };
 /* Rotating the phone changes the stage width, so re-fit the page the same way
    Fit would. Debounced because resize fires in a burst during a rotate. */
