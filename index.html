@@ -36,16 +36,19 @@
   --muted:#6B5F76;
   --line:#E5DEEA;
   --line-soft:#F0EAF3;
-  --mark:#6D4D9E;
+  /* --mark is the light fill (buttons, chips). Text on a pale tint needs to be
+     deeper than a light fill can be, so --mark-ink carries that role. */
+  --mark:#8260B2;
+  --mark-ink:#6D4D9E;
   --mark-soft:#EBE1F5;
   --on-mark:#FFFFFF;
   /* Current-tab pill. Deliberately stronger than --mark-soft (1.61:1 against
      the bar, not 1.26:1) with its own deeper label, so the tab you are on is
      obvious at a glance in daylight. */
-  --pill:#D6C5EA;
-  --pill-ink:#4A3270;
+  --pill:#D9CAEE;
+  --pill-ink:#57397F;
   --track:#E8E2ED;
-  --fill:#8A6AB8;
+  --fill:#8E6FBC;
   --caution:#8A6216;
   --caution-soft:#F7EEDC;
   --alarm:#A32B3F;
@@ -63,6 +66,7 @@ html[data-theme="dark"]{
   --line:#342C40;
   --line-soft:#272031;
   --mark:#BFA3E8;
+  --mark-ink:#C9B0EE;
   --mark-soft:#2C2338;
   /* Dark ink on the light-purple chip. White here measured 2.26:1 — unreadable. */
   --on-mark:#241C2F;
@@ -147,7 +151,7 @@ main{padding:18px 16px 24px;max-width:720px;margin:0 auto}
 .btn{background:var(--mark);color:#fff;border:0;border-radius:11px;padding:12px 16px;font-weight:650;font-size:.92rem;cursor:pointer;width:100%}
 .btn:active{filter:brightness(.94)}
 .btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
-.btn.quiet{background:var(--mark-soft);color:var(--mark);border:0}
+.btn.quiet{background:var(--mark-soft);color:var(--mark-ink);border:0}
 .btn.danger{background:var(--card);color:var(--alarm);border:1px solid var(--line)}
 .btn.sm{padding:8px 12px;font-size:.82rem;width:auto;border-radius:9px}
 .row{display:flex;gap:8px;flex-wrap:wrap}
@@ -207,7 +211,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-vis
 .item .meta{font-size:.75rem;color:var(--muted);margin-top:3px}
 .item .x{background:none;border:0;color:var(--muted);font-size:1.1rem;cursor:pointer;padding:2px 4px;line-height:1}
 .check{width:26px;height:26px;flex:none;border-radius:7px;border:1.8px solid var(--line);background:var(--card);cursor:pointer;display:flex;align-items:center;justify-content:center;margin-top:1px}
-.check.on{background:var(--mark);border-color:var(--mark);color:#fff;font-size:.85rem;font-weight:700}
+.check.on{background:var(--mark);border-color:var(--mark);color:var(--on-mark);font-size:.85rem;font-weight:700}
 .done p{text-decoration:line-through;color:var(--muted)}
 .empty{text-align:center;padding:26px 12px;color:var(--muted);font-size:.9rem}
 .empty b{display:block;color:var(--ink);font-size:1rem;margin-bottom:4px}
@@ -218,7 +222,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-vis
 .sx .name{font-size:.9rem;font-weight:600;margin-bottom:7px}
 .chips{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .chips button{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:9px 4px;font-size:.76rem;font-weight:600;color:var(--muted);cursor:pointer}
-.chips button[aria-pressed="true"]{background:var(--mark);border-color:var(--mark);color:#fff}
+.chips button[aria-pressed="true"]{background:var(--mark);border-color:var(--mark);color:var(--on-mark)}
 .chips button[aria-pressed="true"][data-v="3"]{background:var(--caution);border-color:var(--caution)}
 
 /* files */
@@ -229,10 +233,19 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-vis
 .tile .cap{padding:9px 10px}
 .tile .cap b{display:block;font-size:.82rem;font-weight:650;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tile .cap span{font-size:.7rem;color:var(--muted)}
-.tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mark);background:var(--mark-soft);padding:2px 7px;border-radius:5px}
-.tagrow{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:12px;-webkit-overflow-scrolling:touch}
+.tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mark-ink);background:var(--mark-soft);padding:2px 7px;border-radius:5px}
+/* padding-bottom is the gap between the chips and the scrollbar, which sits at
+   the bottom of the scroll box. 4px left them touching. */
+.tagrow{
+  display:flex;gap:6px;overflow-x:auto;padding-bottom:11px;margin-bottom:10px;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;scrollbar-color:var(--line) transparent;
+}
+.tagrow::-webkit-scrollbar{height:4px}
+.tagrow::-webkit-scrollbar-track{background:transparent}
+.tagrow::-webkit-scrollbar-thumb{background:var(--line);border-radius:999px}
 .tagrow button{flex:none;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:.8rem;font-weight:600;color:var(--muted);cursor:pointer}
-.tagrow button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.tagrow button[aria-pressed="true"]{background:var(--mark);border-color:var(--mark);color:var(--on-mark)}
 .fileq{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px;background:var(--paper)}
 .fileq input[type=text]{background:var(--card);margin-bottom:8px}
 .fileq .chips2{display:flex;gap:6px;flex-wrap:wrap}
@@ -240,7 +253,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-vis
 .plan{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line-soft);font-size:.87rem}
 .plan:last-child{border-bottom:0}
 .plan .box{width:22px;height:22px;flex:none;border-radius:6px;border:1.8px solid var(--line);background:var(--card);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;margin-top:1px}
-.plan .box.on{background:var(--mark);border-color:var(--mark);color:#fff}
+.plan .box.on{background:var(--mark);border-color:var(--mark);color:var(--on-mark)}
 .plan.done span{color:var(--muted);text-decoration:line-through}
 .plan .t{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-left:auto;flex:none;padding-top:3px}
 
@@ -309,7 +322,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-vis
   <!-- PLAN -->
   <section class="view" id="v-plan"></section>
 
-  <div class="foot noprint">Everything stays on this device. Nothing is uploaded anywhere.<br>Not medical advice — the care team's instructions always come first.<br><span style="opacity:.55">build 2026-08-25e</span></div>
+  <div class="foot noprint">Everything stays on this device. Nothing is uploaded anywhere.<br>Not medical advice — the care team's instructions always come first.<br><span style="opacity:.55">build 2026-08-25f</span></div>
 </main>
 
 <nav class="tabbar">
@@ -1030,7 +1043,7 @@ function backupStatus(){
   const when = new Date(meta.lastExport).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
   return stale
     ? `<div class="notice" style="color:var(--alarm);background:var(--alarm-soft)">Changes since the last backup (${when}). Save a fresh one before sending it anywhere.</div>`
-    : `<div class="notice" style="color:var(--mark);background:var(--mark-soft)">Backup is current, saved ${when}.</div>`;
+    : `<div class="notice" style="color:var(--mark-ink);background:var(--mark-soft)">Backup is current, saved ${when}.</div>`;
 }
 
 window.setG=(k,v)=>{ S.guidance[k]=v; save() };
